@@ -1,10 +1,22 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
+    username = db.Column(db.String(80), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128))
     surveys = db.relationship('Survey', backref='creator', lazy=True)
+    responses = db.relationship('Response', backref='answered', lazy=True)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return f'<User {self.username}>'
 
 class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,12 +35,9 @@ class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    responses = db.relationship('Response', backref='answer', lazy=True)
+    responses = db.relationship('Response', backref='answer_response', lazy=True)
 
 class Response(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    answer_id = db.Column(db.Integer, db.ForeignKey('answer.id'), nullable=False)
-    user = db.relationship('User', backref=db.backref('responses', lazy=True))
-    answer = db.relationship('Answer', backref=db.backref('responses', lazy=True))
-   
+    answer_id = db.Column(db.Integer, db.ForeignKey('answer.id'), nullable=False)   
