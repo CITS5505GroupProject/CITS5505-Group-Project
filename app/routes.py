@@ -19,7 +19,7 @@ def register():
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('user/login'))
+            return redirect(url_for('login'))
         except IntegrityError:
             db.session.rollback()
             flash('Username or email already exists. Please use a different one.', 'danger')
@@ -45,5 +45,5 @@ def login():
             session['username'] = user.username
             return redirect(url_for('dashboard'))
         else:
-            return 'Invalid username or password'
+            flash('Username or email is incorrect, try again.', 'danger')
     return render_template('user/login.html', title='Login', form=form)
