@@ -12,4 +12,4 @@ app.config['SECRET_KEY'] = 'you_will_not_guess'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from app import routes, models
+import models, routes

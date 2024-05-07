@@ -6,6 +6,7 @@ class User(db.Model):
     username = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
+    profilePic = db.Column(db.String(255)) #path to save the file
     surveys = db.relationship('Survey', backref='creator', lazy=True)
     responses = db.relationship('Response', backref='answered', lazy=True)
 
