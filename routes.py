@@ -48,3 +48,4 @@ def login():
         else:
             flash('Username or email is incorrect, try again.', 'danger')
     return render_template('user/login.html', title='Login', form=form)
+

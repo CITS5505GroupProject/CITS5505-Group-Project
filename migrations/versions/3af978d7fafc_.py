@@ -1,4 +1,4 @@
-"""empty message
+"""initialize database
 
 Revision ID: 3af978d7fafc
 Revises: 
