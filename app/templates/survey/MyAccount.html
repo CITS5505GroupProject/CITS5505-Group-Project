@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, Helvetica, neue, sans-serif;
+    }
+    .sidebar {
+        height: 100%;
+        width: 240px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #f8f9fa;
+        overflow-x: hidden;
+        padding-top: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .sidebar a {
+        padding: 12px 16px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .sidebar a:hover {
+        background-color: #e9ecef;
+        color: #0056b3;
+    }
+    .content {
+        margin-left: 250px;
+        padding: 1rem;
+    }
+    .icon {
+        width: 20px;
+        margin-right: 10px;
+    }
+    .btn-space {
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body>
+<div class="sidebar bg-light">
+    <a href="MySurvey.html"><i class="bi bi-journal-text icon"></i>My Surveys</a>
+    <a href="MyAccount.html"><i class="bi bi-heart icon"></i>My Account</a>
+    <a href="Setting.html"><i class="bi bi-trash icon"></i>Setting</a>
+</div>
+<div class="container">
+    <h2 class="mb-3">My Account</h2>
+    <div class="mb-3">
+        <img id="profilePreview" src="https://via.placeholder.com/150" alt="Profile Image Preview">
+        <span id="displayName">SurveyStreamUser001</span>
+    </div>
+    <div class="mb-3">
+        <label for="profileImage" class="form-label">Profile Image</label>
+        <input class="form-control" type="file" id="profileImage" onchange="previewImage()">
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+    </div>
+    <div class="mb-3">
+        <label for="email" the="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Email" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="points" class="form-label">Points</label>
+        <input type="text" class="form-control" id="points" placeholder="Points" readonly>
+    </div>
+    <button type="submit" class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const userData = {
+        email: "user@example.com",
+        points: 120,
+        profileImageUrl: "https://via.placeholder.com/150"
+    };
+
+    document.getElementById('email').value = userData.email;
+    document.getElementById('points').value = userData.points;
+    document.getElementById('profilePreview').src = userData.profileImageUrl;
+    loadProfileUpdateLimits();
+});
+
+function previewImage() {
+    var file = document.getElementById("profileImage").files[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function() {
+            var maxWidth = 150;
+            var maxHeight = 150;
+
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+
+            var ratio = Math.min(maxWidth / img.width, maxHeight / img.height);
+            var newWidth = img.width * ratio;
+            var newHeight = img.height * ratio;
+
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+            var imgPreview = document.getElementById("profilePreview");
+            imgPreview.src = canvas.toDataURL("image/png");
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+let updateCount = 0;
+const limitResetTime = new Date();
+
+function loadProfileUpdateLimits() {
+    let data = localStorage.getItem('updateData');
+    if (data) {
+        data = JSON.parse(data);
+        updateCount = data.count;
+        limitResetTime.setTime(data.time);
+        if (new Date() > limitResetTime) {
+            updateCount = 0;
+            limitResetTime.setDate(limitResetTime.getDate() + 7);
+            saveUpdateLimits();
+        }
+    } else {
+        limitResetTime.setDate(limitResetTime.getDate() + 7);
+        saveUpdateLimits();
+    }
+}
+
+function saveUpdateLimits() {
+    localStorage.setItem('updateData', JSON.stringify({ count: updateCount, time: limitResetTime.getTime() }));
+}
+
+function updateProfile() {
+    if (updateCount >= 5) {
+        alert('You have reached the maximum number of name changes allowed per week.');
+        return;
+    }
+    let nameInput = document.getElementById('name');
+    let name = nameInput.value.trim() || 'SurveyStreamUser001'; // Use default name if blank
+    document.getElementById('displayName').textContent = name; // Update the name immediately
+    updateCount++;
+    saveUpdateLimits();
+    alert('Profile updated successfully!');
+}
+</script>
+</body>
+</html>
