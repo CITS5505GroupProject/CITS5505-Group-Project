@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, FileField, FieldList, FormField
+from wtforms import StringField, PasswordField, SubmitField, FileField, FieldList, FormField, RadioField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
 # User login
@@ -19,18 +19,10 @@ class registrationForm(FlaskForm):
     ])
     submit = SubmitField('Register')
 
-# Create a survey with multiple questions, and each question with multiple options
-class questionOptionForm(FlaskForm):
-    text = StringField('OptionText', validators=[DataRequired()])
-
-class surveyQuestionForm(FlaskForm):
-    text = StringField('QuestionText', validators=[DataRequired()])
-    options = FieldList(FormField(questionOptionForm), min_entries=2, max_entries=10)
-
+# Create a survey
 class createSurveyForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
-    questions = FieldList(FormField(surveyQuestionForm), min_entries=1, max_entries=10)
     submit = SubmitField('Create')
 
 # Update User profile
@@ -52,3 +44,8 @@ class ChangePasswordForm(FlaskForm):
         EqualTo('new_password', message='Passwords must match.')
     ])
     submit = SubmitField('Change Password')
+
+# Option selection
+class OptionForm(FlaskForm):
+    # This subform represents a single option
+    choice = RadioField('Choice')

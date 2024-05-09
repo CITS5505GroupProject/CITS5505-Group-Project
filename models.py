@@ -32,13 +32,13 @@ class Survey(db.Model):
     created_at = db.Column(db.DateTime, default=get_perth_time(), nullable=False)
     is_published = db.Column(db.Boolean, default=False, nullable=False) # False = draft, True = public
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    questions = db.relationship('Question', backref='survey', lazy=True)
+    questions = db.relationship('Question', backref='survey', cascade="all, delete-orphan")
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'), nullable=False)
-    options = db.relationship('Option', backref='question', lazy=True)
+    options = db.relationship('Option', backref='question', cascade="all, delete-orphan")
 
 class Option(db.Model):
     id = db.Column(db.Integer, primary_key=True)

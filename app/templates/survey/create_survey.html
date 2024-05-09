@@ -1,0 +1,76 @@
+<!-- By Tony -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Survey</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Create a New Survey</h2>
+        <form method="POST" action="{{ url_for('create_survey') }}" id="survey-form">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control") }}
+            </div>
+            <div id="questionsContainer"></div>
+            <button type="button" onclick="addQuestion()">Add Question</button>
+            <p>{{ form.submit() }}</p>
+        </form>
+    
+        <script>
+            function addQuestion() {
+                var questionId = $('#questionsContainer .question').length + 1;
+                $('#questionsContainer').append(`
+                    <div class="question" id="question${questionId}">
+                        <label for="question${questionId}">Question ${questionId}</label>
+                        <input type="text" name="question${questionId}" placeholder="Enter your question">
+                        <div class="optionsContainer" id="optionsContainer${questionId}"></div>
+                        <button type="button" onclick="addOption(${questionId})">Add Option</button>
+                        <button type="button" id="removeLastOption${questionId}" onclick="removeLastOption(${questionId})" disabled>Remove Last Option</button>
+                    </div>
+                `);
+                addOption(questionId); // Add first default option
+                addOption(questionId); // Add second default option
+                updateRemoveButtonState(questionId);
+            }
+    
+            function addOption(questionId) {
+                var optionId = $(`#optionsContainer${questionId} .option`).length + 1;
+                $(`#optionsContainer${questionId}`).append(`
+                    <div class="option" id="option${questionId}_${optionId}">
+                        <label for="option${questionId}_${optionId}">Option ${optionId}</label>
+                        <input type="text" name="option${questionId}_${optionId}" placeholder="Enter option text">
+                    </div>
+                `);
+                updateRemoveButtonState(questionId);
+            }
+    
+            function removeLastOption(questionId) {
+                var lastOptionId = $(`#optionsContainer${questionId} .option`).length;
+                if (lastOptionId > 2) {
+                    $(`#option${questionId}_${lastOptionId}`).remove();
+                    updateRemoveButtonState(questionId);
+                }
+            }
+    
+            function updateRemoveButtonState(questionId) {
+                var optionsCount = $(`#optionsContainer${questionId} .option`).length;
+                var removeButton = $(`#removeLastOption${questionId}`);
+                if (optionsCount > 2) {
+                    removeButton.prop('disabled', false);
+                } else {
+                    removeButton.prop('disabled', true);
+                }
+            }
+        </script>
+    </body>
+    </html>
+    
