@@ -25,12 +25,12 @@ class questionOptionForm(FlaskForm):
 
 class surveyQuestionForm(FlaskForm):
     text = StringField('QuestionText', validators=[DataRequired()])
-    options = FieldList(FormField(questionOptionForm), min_entries=2)
+    options = FieldList(FormField(questionOptionForm), min_entries=2, max_entries=10)
 
 class createSurveyForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    desc = StringField('Description', validators=[DataRequired()])
-    questions = FieldList(FormField(surveyQuestionForm), min_entries=1)
+    description = StringField('Description', validators=[DataRequired()])
+    questions = FieldList(FormField(surveyQuestionForm), min_entries=1, max_entries=10)
     submit = SubmitField('Create')
 
 # Update User profile
