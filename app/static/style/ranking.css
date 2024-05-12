@@ -7,63 +7,75 @@ body, h1, h2, h3, p {
 }
 
 body {
-    background-color: #1a2a42; /* Dark blue background */
-    color: #fff; /* White text */
+    background-color: whitesmoke; /* Dark blue background */
+    color: black; /* White text */
 }
 
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
+    max-width: 90%;
+    margin: auto; /* 水平居中 */
+}
+
+@media (min-width: 768px) {
+    .content {
+        max-width: 80%; /* Larger screen width */
+    }
 }
 
 h1 {
     font-family: 'Orbitron', sans-serif;
     font-weight: 700;
     font-size: 3vw; /* Adjust as needed */
-    color: #ff4500; /* Bright orange */
+    color: black; /* Bright orange */
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
     margin-bottom: 20px;
     transition: transform 0.2s, color 0.2s;
 }
 
 h1:hover {
-    color: #ff6347; /* Lighter shade on hover */
+    color: gray; /* Lighter shade on hover */
     transform: scale(1.1);
+}
+
+.table-responsive {
+    width: 100%; /* Adjust to fit the container */
 }
 
 table {
     margin-top: 20px;
-    width: 80%;
-    background: linear-gradient(to right, #2a3b5d, #162238); /* Gradient blue */
+    width: 100%;
+    background-color: #ffffff; /* White background */
     border-radius: 15px; /* Increased rounded corners */
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid #162238; /* Darker blue border */
+    border: 1px solid #cccccc; /* Light gray border */
 }
 
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #ddd; /* Lighter line for separation */
+    border-bottom: 1px solid #e0e0e0; /* Lighter line for separation */
     font-family: 'Roboto', sans-serif;
 }
 
 th {
-    background: linear-gradient(to right, #314a6e, #162238); /* Darker blue gradient */
+    background-color: #f0f0f0; /* Light gray background for the header */
     border-top-left-radius: 15px; /* Rounded top left corner for header */
     border-top-right-radius: 15px; /* Rounded top right corner for header */
     font-weight: 700;
-    color: #ff4500; /* Bright orange */
+    color: #2a3b5d; /* Dark blue text */
     text-align: center; /* Centered header text */
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 td {
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    color: #ffffff; /* White text */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    color: #2a3b5d; /* Dark blue text */
     text-align: center; /* Centered cell text */
 }
 
@@ -74,7 +86,7 @@ td {
 .load-more, .accordion {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #2a3b5d; /* Dark blue */
+    background-color: #28a745; /* Green background for buttons */
     color: #fff; /* White text */
     border: none;
     border-radius: 15px;
@@ -85,14 +97,14 @@ td {
 }
 
 .load-more:hover, .accordion:hover, .accordion:focus {
-    background-color: #162238; /* Darker shade on hover */
+    background-color: #218838; /* Darker shade of green on hover */
 }
 
 .panel {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
-    background-color: #2a3b5d; /* Match the table color */
+    background-color: #ffffff; /* Match the table color */
     border-radius: 15px;
     width: 80%;
     margin-top: 10px;
@@ -113,7 +125,7 @@ td {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #2a3b5d; /* Slightly lighter blue */
+    background-color: #ffffff; /* White background */
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     width: 8vw; /* Match the width of the button */
@@ -124,7 +136,7 @@ td {
 }
 
 .dropdown-content a {
-    color: white;
+    color: #2a3b5d; /* Dark blue text */
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -133,11 +145,11 @@ td {
 }
 
 .dropdown-content a:hover {
-    background-color: #162238; /* Darker blue on hover */
+    background-color: #f0f0f0; /* Light gray on hover */
 }
 
 .dropbtn {
-    background-color: #ff6347; /* Vivid color for visibility */
+    background-color: #28a745; /* Green background for button */
     color: white;
     font-size: 1.5vw; /* Font size relative to viewport width */
     font-weight: bold;
@@ -157,5 +169,19 @@ td {
 }
 
 .dropbtn:hover {
-    background-color: #ff4500; /* Darker shade on hover */
+    background-color: #218838; /* Darker shade of green on hover */
+}
+
+td img.avatar {
+    border-radius: 50%; /* Make the avatar image circular */
+    border: 2px solid #28a745; /* Green border around the avatar */
+    width: 40px; /* Ensure consistent size */
+    height: 40px; /* Ensure consistent size */
+}
+
+td img.avatar, .current-rank img.avatar {
+    border-radius: 50%; /* Make the avatar image circular */
+    border: 2px solid #28a745; /* Green border around the avatar */
+    width: 40px; /* Ensure consistent size */
+    height: 40px; /* Ensure consistent size */
 }

@@ -40,17 +40,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, 100);
     });
-
-    // Load more rows
-    const loadMoreButton = document.querySelector('.load-more');
-    const extraRows = document.querySelectorAll('.extra-row');
-    let isExpanded = false;
-
-    loadMoreButton.addEventListener('click', function () {
-        isExpanded = !isExpanded;
-        extraRows.forEach(row => {
-            row.style.display = isExpanded ? 'table-row' : 'none';
-        });
-        loadMoreButton.textContent = isExpanded ? 'Show Less' : 'Load More';
-    });
 });
