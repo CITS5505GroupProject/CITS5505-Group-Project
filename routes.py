@@ -187,3 +187,8 @@ def update_profile(user_id):
         return redirect(url_for('login'))
     
     return render_template('survey/update_profile.html', form=form, profile_url=profile_url)
+
+@app.route('/survey-dashboard')
+def survey_dashboard():
+    surveys = Survey.query.all()
+    return render_template('survey/survey_dashboard.html', surveys = surveys)
