@@ -97,34 +97,33 @@ def change_password(user_id):
     return render_template('user/change_password.html', form=form)
 
 @app.route('/create-survey', methods=['GET', 'POST'])
+@login_required
 def create_survey():
     survey_form = createSurveyForm()
+    if survey_form.validate_on_submit():
+        new_survey = Survey(title=survey_form.title.data, description=survey_form.description.data, creator=current_user)
+        db.session.add(new_survey)
+        db.session.commit()
 
-    if current_user.is_authenticated:
-        if survey_form.validate_on_submit():
-            new_survey = Survey(title=survey_form.title.data, description=survey_form.description.data, creator=current_user)
-            db.session.add(new_survey)
+        questions = {}
+        i = 1
+        while f'question{i}' in request.form:
+            question_text = request.form[f'question{i}']
+            new_question = Question(text=question_text, survey=new_survey)
+            db.session.add(new_question)
             db.session.commit()
-
-            questions = {}
-            i = 1
-            while f'question{i}' in request.form:
-                question_text = request.form[f'question{i}']
-                new_question = Question(text=question_text, survey=new_survey)
-                db.session.add(new_question)
-                db.session.commit()
-                options = []
-                j = 1
-                while f'option{i}_{j}' in request.form:
-                    option_text = request.form[f'option{i}_{j}']
-                    options.append(option_text)
-                    new_option = Option(text=option_text, question=new_question)
-                    db.session.add(new_option)
-                    j += 1
-                questions[question_text] = options
-                i += 1
-            db.session.commit()
-            return redirect(url_for('take_survey', survey_id = new_survey.id))
+            options = []
+            j = 1
+            while f'option{i}_{j}' in request.form:
+                option_text = request.form[f'option{i}_{j}']
+                options.append(option_text)
+                new_option = Option(text=option_text, question=new_question)
+                db.session.add(new_option)
+                j += 1
+            questions[question_text] = options
+            i += 1
+        db.session.commit()
+        return redirect(url_for('take_survey', survey_id = new_survey.id))
 
     return render_template('survey/create_survey.html', form=survey_form)
 

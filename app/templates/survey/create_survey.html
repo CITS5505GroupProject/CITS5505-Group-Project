@@ -35,6 +35,7 @@
                         <div class="optionsContainer" id="optionsContainer${questionId}"></div>
                         <button type="button" onclick="addOption(${questionId})">Add Option</button>
                         <button type="button" id="removeLastOption${questionId}" onclick="removeLastOption(${questionId})" disabled>Remove Last Option</button>
+                        <button type="button" onclick="removeQuestion(${questionId})">Remove Question</button>
                     </div>
                 `);
                 addOption(questionId); // Add first default option
@@ -60,6 +61,27 @@
                     updateRemoveButtonState(questionId);
                 }
             }
+
+            function removeQuestion(questionId) {
+                $(`#question${questionId}`).remove();
+                updateQuestionIDs();
+            }
+
+            function updateQuestionIDs() {
+                $('#questionsContainer .question').each(function(index) {
+                    var newQuestionId = index + 1;
+                    var oldQuestionId = $(this).attr('id').replace('question', '');
+                    $(this).attr('id', `question${newQuestionId}`);
+                    $(this).find('label').first().text(`Question ${newQuestionId}`);
+                    $(this).find('input').first().attr('name', `question${newQuestionId}`);
+                    $(this).find('.optionsContainer').each(function() {
+                        $(this).attr('id', `optionsContainer${newQuestionId}`);
+                    });
+                    $(this).find('[onclick^="addOption"]').attr('onclick', `addOption(${newQuestionId})`);
+                    $(this).find('[onclick^="removeLastOption"]').attr('onclick', `removeLastOption(${newQuestionId})`);
+                    $(this).find('[onclick^="removeQuestion"]').attr('onclick', `removeQuestion(${newQuestionId})`);
+                });
+            }
     
             function updateRemoveButtonState(questionId) {
                 var optionsCount = $(`#optionsContainer${questionId} .option`).length;
@@ -70,6 +92,53 @@
                     removeButton.prop('disabled', true);
                 }
             }
+
+            $(document).ready(function() {
+                $('#survey-form').submit(function(event) {
+                    // Check if there are any questions added
+                    if (!hasQuestions()) {
+                        event.preventDefault(); // Prevent form submission
+                        alert('Please add at least one question to the survey.');
+                        return;
+                    }
+
+                    // Validate all fields
+                    var allFieldsValid = validateFields();
+                    if (!allFieldsValid) {
+                        event.preventDefault(); // Prevent form submission
+                        alert('Please fill in all required fields.');
+                    }
+                });
+
+                function hasQuestions() {
+                    return $('#questionsContainer .question').length > 0;
+                }
+
+                function validateFields() {
+                    let isValid = true;
+                    // Check each question input
+                    $('.question input[type="text"]').each(function() {
+                        if ($(this).val().trim() === '') {
+                            $(this).css('border', '2px solid red'); // Highlight empty fields
+                            isValid = false;
+                        } else {
+                            $(this).css('border', ''); // Reset border if corrected
+                        }
+                    });
+
+                    // Check each option input
+                    $('.option input[type="text"]').each(function() {
+                        if ($(this).val().trim() === '') {
+                            $(this).css('border', '2px solid red'); // Highlight empty fields
+                            isValid = false;
+                        } else {
+                            $(this).css('border', ''); // Reset border if corrected
+                        }
+                    });
+
+                    return isValid;
+                }
+            });
         </script>
     </body>
     </html>
