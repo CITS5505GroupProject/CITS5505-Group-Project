@@ -1,9 +1,9 @@
 from flask import render_template, redirect, url_for, flash, request, jsonify
 from app import app, db, os, mail
 from models import User, Survey, Question, Option, UserAnswer
-from forms import registrationForm, loginForm, createSurveyForm, RadioField, SubmitField, updateProfileForm, DataRequired, FlaskForm, ResetPasswordForm
+from forms import registrationForm, loginForm, createSurveyForm, RadioField, SubmitField, updateProfileForm, DataRequired, FlaskForm, ResetPasswordForm, ChangePasswordForm
 from sqlalchemy.exc import IntegrityError
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 import random
 from flask_mail import Message
@@ -80,6 +80,21 @@ def reset_password():
             flash("Email not exist. Try again...", 'danger')
         
     return render_template('user/reset_password.html', form = form)
+
+@app.route('/change-password/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def change_password(user_id):
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        user = User.query.get(user_id)
+        if user.check_password(form.current_password.data):
+            user.set_password(form.new_password.data)
+            db.session.commit()
+            flash("Password changed successfully!", "success")
+        else:
+            flash("Current password is incorrect, try again...", "danger")
+            redirect(url_for('change_password', user_id = user_id))
+    return render_template('user/change_password.html', form=form)
 
 @app.route('/create-survey', methods=['GET', 'POST'])
 def create_survey():
