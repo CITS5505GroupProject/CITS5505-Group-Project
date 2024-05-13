@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction Page</title>
+<link rel="stylesheet" href="../static/style/intro.css">
+</head>
+<body>
+<div class="main-header">
+  <h1>Free Survey Platform</h1>
+  <p>Enjoy unlimited surveys, questions, and responses completely free - forever!</p>
+  <button class="button" onclick="redirectToCreateSurvey()">Start for Free</button>
+  <p>No Credit card required</p>
+</div>
+
+<div class="survey-section">
+    <h1>Meeting Diverse Survey Needs.</h1>
+    <div class="survey-cards">
+      <div class="for">
+        <img src="../Picture/ForEducation.png" alt="For Education">
+        <h2 class="card-title">For Education</h2>
+        <p class="card-text">Create surveys of various styles, types, and themes. Get more responses.</p>
+      </div>
+      <div class="for">
+        <img src="../Picture/ForBusiness.png" alt="For Business">
+        <h2 class="card-title">For Business</h2>
+        <p class="card-text">Discover your employees' needs. Improve management and increase work efficiency.</p>
+      </div>
+      <div class="for">
+        <img src="../Picture/ForPersonal.png" alt="For Personal">
+        <h2 class="card-title">For Personal</h2>
+        <p class="card-text">Identify and solve the pain points of the business. Establish a good reputation and increase revenue.</p>
+      </div>
+    </div>
+</div>
+
+<div class="steps-container">
+    <div class="button-container">
+      <button class="button" onclick="showStep(0)">Step 1</button>
+      <button class="button" onclick="showStep(1)">Step 2</button>
+      <button class="button" onclick="showStep(2)">Step 3</button>
+    </div>
+  
+    <div id="card-0" class="card">
+      <h2>Step 1: Edit</h2>
+      <p>Customize your survey with various question types and themes.</p>
+      <img src="../Picture/edit.png" alt="Edit">
+    </div>
+
+    <div id="card-1" class="card">
+      <h2>Step 2: Share</h2>
+      <p>Reach your audience with links, emails, QR codes, and more.</p>
+      <img src="../Picture/share.png" alt="Share">
+    </div>
+    
+    <div id="card-2" class="card">
+      <h2>Step 3: View Report</h2>
+      <p>Reach your audience with links, emails, QR codes, and more.</p>
+      <img src="../Picture/ViewReport.png" alt="ViewReport">
+    </div>
+    
+</div>
+
+<div class="get-started">
+  <h2>Get Started Now</h2>
+  <p>Employee surveys, customer surveys, product surveys, customer journey, general surveys — we can provide comprehensive services for all your needs. Get started and create your first survey for free.</p>
+  <button onclick="location.href='../MySurvey/CreateSurvey.html'">Create a Survey</button>
+</div>
+
+<script>
+  function redirectToCreateSurvey() {
+    window.location.href = '../MySurvey/CreateSurvey.html';
+  }
+</script>
+
+<script src="intro.js"></script>
+
+</body>
+</html>

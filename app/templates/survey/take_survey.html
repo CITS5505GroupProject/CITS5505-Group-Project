@@ -1,0 +1,32 @@
+<!-- By Tony -->
+<!-- templates/take_survey.html  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ survey.title }}</title>
+</head>
+<body>
+    <h1>{{ survey.title }}</h1>
+    <p>{{ survey.description }}</p>
+<!-- take_survey.html -->
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+        {% if field.type != 'CSRFTokenField' and field.type != 'SubmitField' %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                <div>
+                   {% for subfield in field %}
+                        <label>{{ subfield }} {{ subfield.label.text }}</label><br>
+                    {% endfor %} 
+                </div>
+                
+            </div>
+        {% endif %}
+    {% endfor %}
+    {{ form.submit() }}
+</form>
+
+</body>
+</html>

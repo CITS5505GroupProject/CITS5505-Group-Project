@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Survey</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar as Toolbar -->
+            <div class="col-md-3 bg-light">
+                <div class="d-flex flex-column flex-shrink-0 p-3">
+                    <h4>Question Types</h4>
+                    <button class="btn btn-outline-primary my-1" onclick="addMultipleChoice()">Multiple Choice</button>
+                    <button class="btn btn-outline-secondary my-1" onclick="addCheckbox()">Checkboxes</button>
+                    <button class="btn btn-outline-success my-1" onclick="addDateQuestion()">Date</button>
+                    <button class="btn btn-outline-danger my-1" onclick="addTableText()">Table Text</button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="p-4">
+                    <h2>Create Your Survey</h2>
+                    <form id="surveyForm">
+                        <!-- Survey Name -->
+                        <div class="mb-3">
+                            <label for="surveyName" class="form-label">Survey Name</label>
+                            <input type="text" class="form-control" id="surveyName" placeholder="Enter survey name">
+                        </div>
+                        <div id="questionsContainer"></div>
+                        <button type="button" class="btn btn-primary" onclick="submitSurvey()">Save Survey</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addMultipleChoice() {
+            const questionId = 'question' + (document.querySelectorAll('.question').length + 1);
+            const html = `<div class="mb-3 question">
+                            <input type="text" class="form-control mb-1 question-title" placeholder="Enter your multiple choice question">
+                            <div id="${questionId}">
+                                <input type="text" class="form-control option-input" placeholder="Option 1">
+                                <input type="text" class="form-control option-input" placeholder="Option 2">
+                            </div>
+                            <button type="button" class="btn btn-sm btn-link" onclick="addOption('${questionId}')">Add option</button>
+                        </div>`;
+            document.getElementById('questionsContainer').insertAdjacentHTML('beforeend', html);
+        }
+
+        function addCheckbox() {
+            const questionId = 'question' + (document.querySelectorAll('.question').length + 1);
+            const html = `<div class="mb-3 question">
+                            <input type="text" class="form-control mb-1 question-title" placeholder="Enter your checkbox question">
+                            <div id="${questionId}">
+                                <input type="text" class="form-control option-input" placeholder="Option 1">
+                                <input type="text" class="form-control option-input" placeholder="Option 2">
+                            </div>
+                            <button type="button" class="btn btn-sm btn-link" onclick="addOption('${questionId}')">Add option</button>
+                        </div>`;
+            document.getElementById('questionsContainer').insertAdjacentHTML('beforeend', html);
+        }
+
+        function addOption(questionId) {
+            const container = document.getElementById(questionId);
+            const optionNumber = container.querySelectorAll('.option-input').length + 1;
+            const optionInput = `<input type="text" class="form-control option-input" placeholder="Option ${optionNumber}">`;
+            container.insertAdjacentHTML('beforeend', optionInput);
+        }
+
+        function addDateQuestion() {
+            const html = `<div class="mb-3 question">
+                            <input type="text" class="form-control mb-1 question-title" placeholder="Enter your date question">
+                            <input type="date" class="form-control">
+                        </div>`;
+            document.getElementById('questionsContainer').insertAdjacentHTML('beforeend', html);
+        }
+
+        function addTableText() {
+            const html = `<div class="mb-3 question">
+                            <input type="text" class="form-control mb-1 question-title" placeholder="Enter your table text question">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>`;
+            document.getElementById('questionsContainer').insertAdjacentHTML('beforeend', html);
+        }
+
+        function submitSurvey() {
+        const surveyName = document.getElementById('surveyName').value;
+         if (surveyName) {
+             // Get existing surveys from local storage or initialize as empty array
+             const surveys = JSON.parse(localStorage.getItem('surveys')) || [];
+             // Add new survey
+            surveys.push({ name: surveyName, status: 'Draft' });
+            // Save back to local storage
+            localStorage.setItem('surveys', JSON.stringify(surveys));
+            alert('Survey saved!');
+            // Redirect to 'My Survey' page after saving
+            window.location.href = 'mySurvey.html'; // Modify the path as necessary
+        } else {
+            alert('Please enter a survey name.');
+        }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
