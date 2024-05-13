@@ -1,25 +1,26 @@
 from flask import render_template, redirect, url_for, flash, session
 from app import app, db
-from app.models import User
-from app.forms import registrationForm, loginForm
+from models import User
+from forms import registrationForm, loginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.exc import IntegrityError
 @app.route('/')
 @app.route('/index')
 def index():
     user = {'username':'Tony', 'DoB':'10/12/2001'}
-    return render_template('index.html', title = 'Home Page', user = user)
+    return render_template('/index.html', title = 'Home Page', user = user)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = registrationForm()
     if form.validate_on_submit():
+        #initial path for profile picture
         new_user = User(username=form.username.data, email=form.email.data)
         new_user.set_password(form.confirm_password.data)
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('user/login'))
+            return redirect(url_for('login'))
         except IntegrityError:
             db.session.rollback()
             flash('Username or email already exists. Please use a different one.', 'danger')
@@ -45,5 +46,6 @@ def login():
             session['username'] = user.username
             return redirect(url_for('dashboard'))
         else:
-            return 'Invalid username or password'
+            flash('Username or email is incorrect, try again.', 'danger')
     return render_template('user/login.html', title='Login', form=form)
+
