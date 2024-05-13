@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, RadioField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from flask_wtf.file import FileAllowed, FileField
 
@@ -23,7 +23,7 @@ class registrationForm(FlaskForm):
 # Create a survey
 class createSurveyForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Create')
 
 # Update User profile
