@@ -11,10 +11,7 @@
 <body>
     <div class="content container">
         <h1>Leaderboard</h1>
-        <div class="current-rank">
-            <img src="https://via.placeholder.com/50" alt="User1's Avatar" class="avatar">
-            <p>🏆 You are currently ranked 1st 🏆</p>
-        </div>
+        <p class="current-rank">🏆 You are currently ranked 1st 🏆</p>
         <div class="table-responsive">
             <table id="leaderboard" class="table table-hover table-bordered shadow rounded-3">
                 <thead>
@@ -25,19 +22,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Example data -->
+                    <!-- Displaying top 10 users with avatars -->
                     <tr>
-                        <td>1🏅</td>
+                        <td><strong>1🏅</strong></td>
                         <td><img src="https://via.placeholder.com/40" alt="User1's Avatar" class="avatar"> User1</td>
                         <td>1234</td>
                     </tr>
                     <tr>
-                        <td>2🥈</td>
+                        <td><strong>2🥈</strong></td>
                         <td><img src="https://via.placeholder.com/40" alt="User2's Avatar" class="avatar"> User2</td>
                         <td>1200</td>
                     </tr>
                     <tr>
-                        <td>3🥉</td>
+                        <td><strong>3🥉</strong></td>
                         <td><img src="https://via.placeholder.com/40" alt="User3's Avatar" class="avatar"> User3</td>
                         <td>1150</td>
                     </tr>
@@ -79,20 +76,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn">Get More Points⭐️</button>
-            <div class="dropdown-content">
-                <a href="/myforms">Go to My Forms</a>
-                <a href="/otherforms">Go to Other Forms</a>
-            </div>
-        </div>
-        <button class="accordion">Ranking Criteria</button>
+        <button onclick="location.href='/otherforms'" class="circle-button">Get More Points ⭐️</button>
+        <h2 class="criteria-title">Ranking Criteria</h2>
         <div class="panel">
             <p>Our ranking system is designed to recognize and reward active participation within our community. Here's how you can earn points:
-
                 Submit Surveys: Earn 5 points for each survey you publish.
                 Complete Surveys: Earn 2 points for each survey you complete for others.
-                
                 Your total score is calculated based on these actions, allowing you to climb the leaderboard and showcase your contribution to the community.</p>
         </div>
     </div>

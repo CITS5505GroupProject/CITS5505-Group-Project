@@ -7,8 +7,8 @@ body, h1, h2, h3, p {
 }
 
 body {
-    background-color: whitesmoke; /* Dark blue background */
-    color: black; /* White text */
+    background-color: #f0f4f8;
+    color: #333;
 }
 
 .content {
@@ -18,170 +18,80 @@ body {
     text-align: center;
     padding: 20px;
     max-width: 90%;
-    margin: auto; /* 水平居中 */
+    margin: auto;
 }
 
-@media (min-width: 768px) {
-    .content {
-        max-width: 80%; /* Larger screen width */
-    }
+h1, .criteria-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: #204056;
 }
 
 h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 3vw; /* Adjust as needed */
-    color: black; /* Bright orange */
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
-    margin-bottom: 20px;
-    transition: transform 0.2s, color 0.2s;
+    font-size: 28px;
 }
 
-h1:hover {
-    color: gray; /* Lighter shade on hover */
-    transform: scale(1.1);
+.criteria-title {
+    font-size: 22px;
+    margin-top: 20px;
 }
 
 .table-responsive {
-    width: 100%; /* Adjust to fit the container */
+    width: 100%;
 }
 
 table {
     margin-top: 20px;
     width: 100%;
-    background-color: #ffffff; /* White background */
-    border-radius: 15px; /* Increased rounded corners */
+    background-color: #ffffff;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid #cccccc; /* Light gray border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid #cccccc;
 }
 
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #e0e0e0; /* Lighter line for separation */
+    border-bottom: 1px solid #e0e0e0;
     font-family: 'Roboto', sans-serif;
 }
 
 th {
-    background-color: #f0f0f0; /* Light gray background for the header */
-    border-top-left-radius: 15px; /* Rounded top left corner for header */
-    border-top-right-radius: 15px; /* Rounded top right corner for header */
+    background-color: #f0f0f0;
     font-weight: 700;
-    color: #2a3b5d; /* Dark blue text */
-    text-align: center; /* Centered header text */
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    color: #204056;
+    text-align: center;
 }
 
 td {
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-    color: #2a3b5d; /* Dark blue text */
-    text-align: center; /* Centered cell text */
+    color: #204056;
+    text-align: center;
 }
 
-.extra-row {
-    display: none;
-}
-
-.load-more, .accordion {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #28a745; /* Green background for buttons */
-    color: #fff; /* White text */
+.circle-button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: #fff;
     border: none;
-    border-radius: 15px;
-    font-size: 16px;
+    border-radius: 50%;
+    font-size: 19px;
+    font-family: 'Orbitron', sans-serif;
     cursor: pointer;
     transition: background-color 0.2s;
-    width: 30%; /* Shortened width */
-}
-
-.load-more:hover, .accordion:hover, .accordion:focus {
-    background-color: #218838; /* Darker shade of green on hover */
 }
 
 .panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    background-color: #ffffff; /* Match the table color */
-    border-radius: 15px;
-    width: 80%;
+    text-align: justify;  /* Adding justify to make text aligned on both sides */
     margin-top: 10px;
-    padding: 0 18px;
+    font-size: 16px;
+    color: #666;  /* Slightly muted color for less emphasis */
 }
 
-.panel p {
-    margin: 18px 0;
-}
-
-.dropdown {
-    position: fixed; /* Fixed position */
-    left: 2vw; /* Align left using viewport width */
-    top: 10vh; /* Adjust the distance from the top using viewport height */
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffffff; /* White background */
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    width: 8vw; /* Match the width of the button */
-    min-width: 50px; /* Ensure dropdown has a minimum width */
-    top: calc(8vw + 10px); /* Position below the button */
-    border-radius: 8px; /* Rounded corners for dropdown */
-    overflow: hidden; /* Ensures the child elements don't overflow */
-}
-
-.dropdown-content a {
-    color: #2a3b5d; /* Dark blue text */
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.2s;
-    border-radius: 8px; /* Rounded corners for dropdown links */
-}
-
-.dropdown-content a:hover {
-    background-color: #f0f0f0; /* Light gray on hover */
-}
-
-.dropbtn {
-    background-color: #28a745; /* Green background for button */
-    color: white;
-    font-size: 1.5vw; /* Font size relative to viewport width */
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 8vw; /* Width relative to viewport width */
-    height: 8vw; /* Height relative to viewport width */
-    min-width: 50px; /* Minimum width to ensure usability */
-    min-height: 50px; /* Minimum height to ensure usability */
-    border-radius: 50%; /* Make button circular */
-    transition: background-color 0.3s;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.dropbtn:hover {
-    background-color: #218838; /* Darker shade of green on hover */
-}
-
-td img.avatar {
-    border-radius: 50%; /* Make the avatar image circular */
-    border: 2px solid #28a745; /* Green border around the avatar */
-    width: 40px; /* Ensure consistent size */
-    height: 40px; /* Ensure consistent size */
-}
-
-td img.avatar, .current-rank img.avatar {
-    border-radius: 50%; /* Make the avatar image circular */
-    border: 2px solid #28a745; /* Green border around the avatar */
-    width: 40px; /* Ensure consistent size */
-    height: 40px; /* Ensure consistent size */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Ensure the avatar is circular */
+    margin-right: 10px; /* Space between the avatar and username */
 }
