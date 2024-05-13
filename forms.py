@@ -49,3 +49,7 @@ class ChangePasswordForm(FlaskForm):
 class OptionForm(FlaskForm):
     # This subform represents a single option
     choice = RadioField('Choice')
+
+class ResetPasswordForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField("Reset Password")

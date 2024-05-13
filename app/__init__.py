@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 import os
-from flask_mail import Mail, Message
+from flask_mail import Mail
 
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'surveystream10@gmail.com'
-app.config['MAIL_PASSWORD'] = 'survey123'
+app.config['MAIL_PASSWORD'] = 'gaxh zpcp gvmz mvog' #app password
 app.config['MAIL_DEFAULT_SENDER'] = 'surveystream10@gmail.com'
 
 mail = Mail(app)
