@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, FileField, FieldList, FormField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, RadioField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
+from flask_wtf.file import FileAllowed, FileField
 
 # User login
 class loginForm(FlaskForm):
@@ -28,8 +29,7 @@ class createSurveyForm(FlaskForm):
 # Update User profile
 class updateProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    profile_pic = FileField('Update Profile Picture')
+    profile_pic = FileField('Profile Picture', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
     submit = SubmitField('Update Profile')
 
 # Change Password

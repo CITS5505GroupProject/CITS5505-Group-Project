@@ -1,9 +1,12 @@
 from flask import render_template, redirect, url_for, flash, request, jsonify
 from app import app, db
 from models import User, Survey, Question, Option, UserAnswer
-from forms import registrationForm, loginForm, createSurveyForm, RadioField, SubmitField, OptionForm, DataRequired, FlaskForm
+from forms import registrationForm, loginForm, createSurveyForm, RadioField, SubmitField, updateProfileForm, DataRequired, FlaskForm
 from sqlalchemy.exc import IntegrityError
 from flask_login import login_user, logout_user, current_user
+from werkzeug.utils import secure_filename
+from app import os
+
 
 @app.route('/')
 @app.route('/index')
@@ -122,3 +125,27 @@ def create_survey_form(survey_id):
     setattr(DynamicSurveyForm, 'submit', SubmitField('Submit'))
     
     return DynamicSurveyForm()
+
+@app.route('/update_profile/<int:user_id>', methods=['GET', 'POST'])
+def update_profile(user_id):
+    if current_user.is_authenticated and current_user.id == user_id:
+        user = current_user
+        profile_url = user.profilePic
+        form = updateProfileForm(obj=user)
+        if form.validate_on_submit():
+            if form.profile_pic.data:
+                filename = secure_filename(form.profile_pic.data.filename)
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                print(filepath)
+                print(filename)
+                form.profile_pic.data.save(filepath)
+                user.profilePic = 'user_profile/' + filename
+            
+            user.username = form.username.data
+            db.session.commit()
+            return redirect(url_for('update_profile', user_id=user_id))
+
+    else:
+        return redirect(url_for('login'))
+    
+    return render_template('survey/update_profile.html', form=form, profile_url=profile_url)

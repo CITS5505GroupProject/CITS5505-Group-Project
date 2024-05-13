@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
-    profilePic = db.Column(db.String(255)) #path to save the file
+    profilePic = db.Column(db.String(255), default="static/user_profile/user_default.png") #path to save the file
     surveys = db.relationship('Survey', backref='creator', lazy=True)
     user_answers = db.relationship('UserAnswer', backref='answered', lazy=True)
 
