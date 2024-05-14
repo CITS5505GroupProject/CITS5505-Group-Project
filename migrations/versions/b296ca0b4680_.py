@@ -50,12 +50,12 @@ def downgrade():
 
     with op.batch_alter_table('survey', schema=None) as batch_op:
         batch_op.add_column(sa.Column('is_published', sa.BOOLEAN(), nullable=False))
-        batch_op.drop_constraint('fk_user_survey', type_='foreignkey')
-        batch_op.create_foreign_key('fk_user_survey', 'user', ['user_id'], ['id'])
+        batch_op.drop_constraint('survey_user_fk', type_='foreignkey')
+        batch_op.create_foreign_key('survey_user_fk', 'user', ['user_id'], ['id'])
 
     with op.batch_alter_table('question', schema=None) as batch_op:
-        batch_op.drop_constraint('survey_user_fk', type_='foreignkey')
-        batch_op.create_foreign_key('survey_user_fk', 'survey', ['survey_id'], ['id'])
+        batch_op.drop_constraint('question_survey_fk', type_='foreignkey')
+        batch_op.create_foreign_key('question_survey_fk', 'survey', ['survey_id'], ['id'])
 
     with op.batch_alter_table('option', schema=None) as batch_op:
         batch_op.drop_constraint('option_question_fk', type_='foreignkey')

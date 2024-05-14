@@ -96,7 +96,7 @@ def change_password(user_id):
             redirect(url_for('change_password', user_id = user_id))
     return render_template('user/change_password.html', form=form)
 
-@app.route('/create-survey', methods=['GET', 'POST'])
+@app.route('/survey/create-survey', methods=['GET', 'POST'])
 @login_required
 def create_survey():
     survey_form = createSurveyForm()
@@ -194,3 +194,25 @@ def survey_dashboard():
     surveys = Survey.query.all()
     surveys_data = [survey.to_dict() for survey in surveys]
     return render_template('survey/survey_dashboard.html', surveys=surveys_data)
+
+@app.route('/my-survey/<int:user_id>', methods=['GET'])
+@login_required
+def my_survey(user_id):
+    surveys = Survey.query.filter_by(user_id=user_id).all()
+    return render_template('survey/mySurvey.html', surveys=surveys)
+
+@app.route('/survey/delete/<int:survey_id>', methods=['DELETE', 'GET'])
+@login_required
+def delete_survey(survey_id):
+    survey = Survey.query.get(survey_id)
+    if not survey:
+        return jsonify({"message": "Survey not found."}), 404
+
+    try:
+        db.session.delete(survey)
+        db.session.commit()
+        flash("Survey deleted successfully", "success")
+        return redirect(url_for('my_survey', user_id=current_user.id))
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": "An error occurred while deleting the survey.", "error": str(e)}), 500

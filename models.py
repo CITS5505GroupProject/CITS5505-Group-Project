@@ -41,7 +41,7 @@ class Survey(db.Model):
     description = db.Column(db.Text, nullable=True)
     type = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=get_perth_time(), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False, name='fk_user_survey')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     questions = db.relationship('Question', backref='survey', cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -60,7 +60,7 @@ class Survey(db.Model):
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
-    survey_id = db.Column(db.Integer, db.ForeignKey('survey.id', ondelete='CASCADE'), nullable=False, name='fk_survey_question')
+    survey_id = db.Column(db.Integer, db.ForeignKey('survey.id', ondelete='CASCADE'), nullable=False)
     options = db.relationship('Option', backref='question', cascade="all, delete-orphan")
     def to_dict(self):
         """Converts this Survey object into a dictionary format, which can be easily turned into JSON."""
@@ -73,7 +73,7 @@ class Question(db.Model):
 class Option(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'), nullable=False, name='fk_question_option')
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'), nullable=False)
     user_answers = db.relationship('UserAnswer', backref='selected', cascade="all, delete-orphan")
     def to_dict(self):
         return {
@@ -83,5 +83,5 @@ class Option(db.Model):
 
 class UserAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False, name='fk_user_useranswer')
-    option_id = db.Column(db.Integer, db.ForeignKey('option.id', ondelete='CASCADE'), nullable=False, name='fk_option_useranswer')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    option_id = db.Column(db.Integer, db.ForeignKey('option.id', ondelete='CASCADE'), nullable=False)
