@@ -25,6 +25,12 @@ class User(db.Model, UserMixin):
     def email_exist(email):
         user = User.query.filter_by(email=email).first()
         return user is not None
+    
+    def to_dict(self):
+        return {
+            'username': self.username,
+            'profilePic': self.profilePic
+        }
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -33,23 +39,49 @@ class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
+    type = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=get_perth_time(), nullable=False)
     is_published = db.Column(db.Boolean, default=False, nullable=False) # False = draft, True = public
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     questions = db.relationship('Question', backref='survey', cascade="all, delete-orphan")
+
+    def to_dict(self):
+        """Converts this Survey object into a dictionary format, which can be easily turned into JSON."""
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'type': self.type,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'is_published': self.is_published,
+            'user_id': self.user_id,
+            'creator': self.creator.to_dict() if self.creator else None,  # Assuming a backref 'creator' from User
+            'questions': [question.to_dict() for question in self.questions]  # This will include questions if needed
+    }
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'), nullable=False)
     options = db.relationship('Option', backref='question', cascade="all, delete-orphan")
+    def to_dict(self):
+        """Converts this Survey object into a dictionary format, which can be easily turned into JSON."""
+        return {
+            'id': self.id,
+            'text': self.text,
+            'options': [option.to_dict() for option in self.options]
+        }
 
 class Option(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     user_answers = db.relationship('UserAnswer', backref='selected', lazy=True)
-
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'text': self.text
+        }
 
 class UserAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)

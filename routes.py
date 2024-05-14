@@ -101,7 +101,7 @@ def change_password(user_id):
 def create_survey():
     survey_form = createSurveyForm()
     if survey_form.validate_on_submit():
-        new_survey = Survey(title=survey_form.title.data, description=survey_form.description.data, creator=current_user)
+        new_survey = Survey(title=survey_form.title.data, type=survey_form.surveyType.data, description=survey_form.description.data, creator=current_user)
         db.session.add(new_survey)
         db.session.commit()
 
@@ -127,7 +127,25 @@ def create_survey():
 
     return render_template('survey/create_survey.html', form=survey_form)
 
+def create_survey_form(survey_id):
+    class DynamicSurveyForm(FlaskForm):
+        # Dynamic fields will be added here
+        pass
+    
+    survey = Survey.query.get_or_404(survey_id)
+    for question in survey.questions:
+        # Create a list of tuples for the RadioField choices
+        choices = [(str(option.id), option.text) for option in question.options]
+        # Add a RadioField per question
+        setattr(DynamicSurveyForm, 'question_' + str(question.id),
+                RadioField(question.text, choices=choices, validators=[DataRequired()]))
+    
+    setattr(DynamicSurveyForm, 'submit', SubmitField('Submit'))
+    
+    return DynamicSurveyForm()
+
 @app.route('/take-survey/<int:survey_id>', methods=['GET', 'POST'])
+@login_required
 def take_survey(survey_id):
     form = create_survey_form(survey_id)
 
@@ -146,23 +164,6 @@ def take_survey(survey_id):
         return redirect(url_for('dashboard'))
     
     return render_template('survey/take_survey.html', form=form, survey=survey)
-
-def create_survey_form(survey_id):
-    class DynamicSurveyForm(FlaskForm):
-        # Dynamic fields will be added here
-        pass
-    
-    survey = Survey.query.get_or_404(survey_id)
-    for question in survey.questions:
-        # Create a list of tuples for the RadioField choices
-        choices = [(str(option.id), option.text) for option in question.options]
-        # Add a RadioField per question
-        setattr(DynamicSurveyForm, 'question_' + str(question.id),
-                RadioField(question.text, choices=choices, validators=[DataRequired()]))
-    
-    setattr(DynamicSurveyForm, 'submit', SubmitField('Submit'))
-    
-    return DynamicSurveyForm()
 
 @app.route('/update_profile/<int:user_id>', methods=['GET', 'POST'])
 def update_profile(user_id):
@@ -191,4 +192,5 @@ def update_profile(user_id):
 @app.route('/survey-dashboard')
 def survey_dashboard():
     surveys = Survey.query.all()
-    return render_template('survey/survey_dashboard.html', surveys = surveys)
+    surveys_data = [survey.to_dict() for survey in surveys]
+    return render_template('survey/survey_dashboard.html', surveys=surveys_data)
