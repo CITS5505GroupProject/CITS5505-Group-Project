@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap');
+
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #1a2a42; /* Dark blue background */
+    color: #fff; /* White text */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 3vw; /* Adjust as needed */
+    color: #ff4500; /* Bright orange */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+h1:hover {
+    color: #ff6347; /* Lighter shade on hover */
+    transform: scale(1.1);
+}
+
+table {
+    margin-top: 20px;
+    width: 80%;
+    background: linear-gradient(to right, #2a3b5d, #162238); /* Gradient blue */
+    border-radius: 15px; /* Increased rounded corners */
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #162238; /* Darker blue border */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Lighter line for separation */
+    font-family: 'Roboto', sans-serif;
+}
+
+th {
+    background: linear-gradient(to right, #314a6e, #162238); /* Darker blue gradient */
+    border-top-left-radius: 15px; /* Rounded top left corner for header */
+    border-top-right-radius: 15px; /* Rounded top right corner for header */
+    font-weight: 700;
+    color: #ff4500; /* Bright orange */
+    text-align: center; /* Centered header text */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+td {
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    color: #ffffff; /* White text */
+    text-align: center; /* Centered cell text */
+}
+
+.extra-row {
+    display: none;
+}
+
+.load-more, .accordion {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #2a3b5d; /* Dark blue */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 30%; /* Shortened width */
+}
+
+.load-more:hover, .accordion:hover, .accordion:focus {
+    background-color: #162238; /* Darker shade on hover */
+}
+
+.panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #2a3b5d; /* Match the table color */
+    border-radius: 15px;
+    width: 80%;
+    margin-top: 10px;
+    padding: 0 18px;
+}
+
+.panel p {
+    margin: 18px 0;
+}
+
+.dropdown {
+    position: fixed; /* Fixed position */
+    left: 2vw; /* Align left using viewport width */
+    top: 10vh; /* Adjust the distance from the top using viewport height */
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2a3b5d; /* Slightly lighter blue */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 8vw; /* Match the width of the button */
+    min-width: 50px; /* Ensure dropdown has a minimum width */
+    top: calc(8vw + 10px); /* Position below the button */
+    border-radius: 8px; /* Rounded corners for dropdown */
+    overflow: hidden; /* Ensures the child elements don't overflow */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s;
+    border-radius: 8px; /* Rounded corners for dropdown links */
+}
+
+.dropdown-content a:hover {
+    background-color: #162238; /* Darker blue on hover */
+}
+
+.dropbtn {
+    background-color: #ff6347; /* Vivid color for visibility */
+    color: white;
+    font-size: 1.5vw; /* Font size relative to viewport width */
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 8vw; /* Width relative to viewport width */
+    height: 8vw; /* Height relative to viewport width */
+    min-width: 50px; /* Minimum width to ensure usability */
+    min-height: 50px; /* Minimum height to ensure usability */
+    border-radius: 50%; /* Make button circular */
+    transition: background-color 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dropbtn:hover {
+    background-color: #ff4500; /* Darker shade on hover */
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Profile Picture</title>
+</head>
+<body>
+    <h1>Upload Profile Picture</h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div>
+            <img src="{{ url_for('static', filename=profile_url) }}" alt="profile_pic" width="150">
+        </div>
+        <div>
+            {{ form.profile_pic.label }}<br>
+            {{ form.profile_pic(size=32) }}<br>
+            {% if form.profile_pic.errors %}
+            {% for error in form.profile_pic.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+        </div>
+        <div>
+            {{ form.username.label }}
+            {{ form.username }}
+        </div>
+        <br>
+        {{ form.submit() }}
+    </form>
+</body>
+</html>
