@@ -1,4 +1,4 @@
-"""empty message
+"""added type field to survey
 
 Revision ID: 8f0f5e909322
 Revises: e491a9ac966e
