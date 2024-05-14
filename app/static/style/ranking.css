@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap');
 
+html {
+    --black: #21252a;
+    --grey-1: #343A40;
+    --grey-2: #495057;
+    --grey-3: #868E96;
+    --grey-4: #ADB5BD;
+    --grey-5: #CED4DA;
+    --grey-6: #DEE2E6;
+    --grey-7: #E9ECEF;
+    --grey-8: #F1F3F5;
+    --grey-9: #F8F9FA;
+    --trans-black: rgba(33, 37, 42, .9);
+    --red: #e10600;
+    --gold: #ffda65;
+    --gold-dark: #a3862c;
+    --bronze: #c99355;
+    --bronze-dark: #80582c;
+}
+
 body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
@@ -9,6 +28,14 @@ body, h1, h2, h3, p {
 body {
     background-color: #f0f4f8;
     color: #333;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 .content {
@@ -33,7 +60,8 @@ h1 {
 
 .criteria-title {
     font-size: 22px;
-    margin-top: 20px;
+    margin-top: 10px;  /* Reduced the margin */
+    text-align: center;  /* Center the title */
 }
 
 .table-responsive {
@@ -55,6 +83,7 @@ th, td {
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
     font-family: 'Roboto', sans-serif;
+    vertical-align: middle; /* Vertically center align text */
 }
 
 th {
@@ -70,32 +99,332 @@ td {
 }
 
 .circle-button {
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    font-size: 19px;
     font-family: 'Orbitron', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    text-decoration: none;
+    position: relative;
+    margin-top: 20px;
+    font-size: 1.5rem; /* Decreased font size */
+    color: #fff;
+    background-color: #acc7ed;
+    border-radius: 10rem;
+    padding: 0.75rem 2rem; /* Adjusted padding */
+    display: inline-block;
+    transform-style: preserve-3d;
+    transition: all 0.6s ease;
+    z-index: 5;
+    border: 2px solid #acc7ed; /* Added border */
+}
+
+.circle-button span {
+    position: relative;
+    z-index: 6;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.circle-button:after {
+    content: "";
+    background: linear-gradient(56deg, #61dafb 0%, #d6cbf6 46%, #f2056f 100%);
+    width: 80%;
+    height: 20%;
+    position: absolute;
+    bottom: -4px;
+    left: 10%;
+    opacity: 0;
+    filter: blur(15px);
+    border-radius: 10rem;
+    transform: translateZ(-1px);
+    transition: opacity 0.6s ease;
+}
+
+.circle-button:before {
+    content: "";
+    background: linear-gradient(56deg, #61dafb 0%, #d6cbf6 46%, #f2056f 100%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    border-radius: 10rem;
+    transition: opacity 0.4s ease;
+}
+
+.circle-button:hover {
+    transition: all 0.6s ease;
+    transform: scale(1.1); /* Adjusted scale */
+    transform-origin: center;
+    border-color: #61dafb; /* Change border color on hover */
+}
+
+.circle-button:hover:after {
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+.circle-button:hover:before {
+    opacity: 1;
+    transition: opacity 0.6s linear;
+}
+
+.circle-button:hover {
+    color: #204056; /* Change text color on hover */
 }
 
 .panel {
-    text-align: justify;  /* Adding justify to make text aligned on both sides */
+    text-align: justify;
     margin-top: 10px;
     font-size: 16px;
-    color: #666;  /* Slightly muted color for less emphasis */
-    border: 2px dashed #cccccc; /* Adding dashed border */
-    padding: 10px; /* Adding padding inside the border */
-    border-radius: 10px; /* Adding border radius for rounded corners */
-    background-color: #f9f9f9; /* Light background color */
+    color: #666;
+    border: 2px dashed #cccccc;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
 }
 
 .avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* Ensure the avatar is circular */
-    margin-right: 10px; /* Space between the avatar and username */
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.list {
+    width: 100%;
+    max-width: 600px;
+    margin: 3rem auto 3rem;
+    border-radius: .4rem;
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, .1), 0px 5px 12px rgba(0, 0, 0, .07);
+}
+
+.list__table {
+    width: 100%;
+    border-spacing: 0;
+    color: var(--grey-3);
+}
+
+.list__header {
+    padding: 3rem 2rem;
+    background: white;
+    border-top-left-radius: .4rem;
+    border-top-right-radius: .4rem;
+}
+
+.list__header h1,
+.list__header h5 {
+    margin: 0;
+    padding: 0;
+}
+
+.list__header h5 {
+    margin-bottom: .5rem;
+    text-transform: uppercase;
+    color: var(--red);
+}
+
+.list__value {
+    display: block;
+    font-size: 18px;
+}
+
+.list__label {
+    font-size: 11px;
+    opacity: .6;
+}
+
+.list__row {
+    background: var(--grey-7);
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.list__row:hover,
+.list__row:focus {
+    transform: scale(1.05);
+    box-shadow: 0px 15px 28px rgba(0, 0, 0, .1), 0px 5px 12px rgba(0, 0, 0, .08);
+    transition: all 300ms ease;
+}
+
+.list__row:not(:last-of-type) .list__cell {
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, .08);
+}
+
+.list__row:first-of-type {
+    color: var(--gold-dark);
+    background: var(--grey-9);
+}
+
+.list__row:first-of-type .list__cell:first-of-type {
+    background: var(--gold);
+    color: var(--gold-dark);
+}
+
+.list__row:nth-of-type(2) {
+    color: var(--grey-2);
+    background: var(--grey-9);
+}
+
+.list__row:nth-of-type(2) .list__cell:first-of-type {
+    background: var(--grey-4);
+    color: var(--grey-2);
+}
+
+.list__row:nth-of-type(3) {
+    color: var(--bronze-dark);
+    background: var(--grey-9);
+}
+
+.list__row:nth-of-type(3) .list__cell:first-of-type {
+    background: var(--bronze);
+    color: var(--bronze-dark);
+}
+
+.list__cell {
+    padding: 1rem;
+}
+
+.list__cell:first-of-type {
+    text-align: center;
+    padding: 1rem .2rem;
+    background: var(--grey-5);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--trans-black);
+    display: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.overlay.is-open {
+    display: block;
+}
+
+.sidebar {
+    position: fixed;
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    top: 0;
+    bottom: 0;
+    box-shadow: none;
+    right: -500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 300ms ease;
+}
+
+.sidebar.is-open {
+    right: 0;
+    transition: all 300ms ease;
+    box-shadow: 0px 0px 100px var(--black);
+}
+
+.sidebar__header {
+    display: flex;
+    justify-content: space-between;
+    background: var(--grey-9);
+    align-items: center;
+    padding: 2rem;
+}
+
+.sidebar__body {
+    padding: 2rem;
+}
+
+.sidebar__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--grey-4);
+}
+
+.button {
+    font-family: inherit;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.button:focus,
+.button:active {
+    outline: 0;
+}
+
+.button--close {
+    padding: 0;
+    margin: 0;
+    height: auto;
+    line-height: 1;
+    color: var(--grey-5);
+}
+
+.button--close:hover {
+    color: var(--grey--4);
+}
+
+.driver {
+    display: flex;
+    align-items: flex-start;
+    opacity: 0;
+    position: relative;
+    left: 100px;
+    animation: fade 500ms ease 150ms forwards;
+}
+
+.driver__image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: 220px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    border: 3px solid white;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, .12);
+    margin-right: 1.5rem;
+}
+
+.driver__content {
+    width: auto;
+}
+
+.driver__title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: .5rem 0;
+}
+
+.driver__table {
+    width: 100%;
+    color: var(--grey-2);
+}
+
+.driver__table small {
+    color: var(--grey-4);
+}
+
+.driver__table td {
+    padding: .3rem .6rem .3rem 0;
+    height: 2rem;
+}
+
+.driver__table img {
+    position: relative;
+    top: 5px;
+    margin-right: 6px;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        left: 0;
+    }
 }
