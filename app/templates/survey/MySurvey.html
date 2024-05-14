@@ -1,63 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Save Survey Page</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<style>
-    body, html {
-        height: 100%;
-        margin: 0;
-        font-family: Arial, Helvetica, neue, sans-serif;
-    }
-    .sidebar {
-        height: 100%;
-        width: 240px;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #f8f9fa;
-        overflow-x: hidden;
-        padding-top: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .sidebar a {
-        padding: 12px 16px;
-        text-decoration: none;
-        font-size: 18px;
-        color: #333;
-        display: flex;
-        align-items: center;
-        border-radius: 4px;
-        transition: background-color 0.3s, color 0.3s;
-    }
-    .sidebar a:hover {
-        background-color: #e9ecef;
-        color: #0056b3;
-    }
-    .content {
-        margin-left: 250px;
-        padding: 1rem;
-    }
-    .icon {
-        width: 20px;
-        margin-right: 10px;
-    }
-    .btn-space {
-        margin-right: 5px;
-    }
-</style>
-</head>
+{% extends 'navbar/navSidebar.html' %}
+{% block content %}
 <body>
-<div class="sidebar bg-light">
-    <a href="MySurvey.html"><i class="bi bi-journal-text icon"></i>My Surveys</a>
-    <a href="MyAccount.html"><i class="bi bi-heart icon"></i>My Account</a>
-    <a href="Setting.html"><i class="bi bi-trash icon"></i>Setting</a>
-</div>
-
 <div class="content">
     <h2>My Surveys</h2>
     <div class="container mt-3">
@@ -65,68 +8,26 @@
             <div class="flex-grow-1 me-3">
                 <input type="text" placeholder="Search..." class="form-control">
             </div>
-            <button class="btn btn-primary btn-lg" onclick="location.href='CreateSurvey.html'">+ New Survey</button>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('create_survey') }}">+ New Survey</a>
         </div>
         <div class="list-group" id="surveyList">
+            {% for survey in surveys %}
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        {{survey.title}}<br>
+                        <small>created by: {{survey.created_at}} </small>
+                    </div>
+                    <div>
+                        <a class="btn btn-outline-primary btn-space">View Result</a>
+                        <a class="btn btn-outline-danger btn-space" href="{{ url_for('delete_survey', survey_id=survey.id) }}">Delete</a>
+                    </div>
+                </div>
+            {% else %}
+                <div>
+                    No survey found!
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const surveyList = document.getElementById('surveyList');
-        const surveys = JSON.parse(localStorage.getItem('surveys')) || [];
-    
-        surveys.forEach((survey, index) => {
-            const surveyElement = document.createElement('div');
-            surveyElement.className = 'list-group-item d-flex justify-content-between align-items-center';
-            
-            const details = document.createElement('div');
-            details.innerHTML = `${survey.name} <br><small>Created: ${survey.created}</small> <span class="badge bg-primary rounded-pill">${survey.status}</span>`;
-            
-            const buttons = document.createElement('div');
-            
-            const editBtn = document.createElement('button');
-            editBtn.className = 'btn btn-outline-primary btn-space';
-            editBtn.innerHTML = 'Edit';
-            editBtn.onclick = function() { location.href = `CreateSurvey.html?surveyId=${index}`; };
-            
-            const shareBtn = document.createElement('button');
-            shareBtn.className = 'btn btn-outline-success btn-space';
-            shareBtn.innerHTML = 'Upload';
-            shareBtn.onclick = function() { 
-                location.href = `../OtherSurveys/OtherSurveys.html?surveyId=${index}`;
-                alert('Survey successfully published.');
-            };
-            
-            const resultsBtn = document.createElement('button');
-            resultsBtn.className = 'btn btn-outline-info btn-space';
-            resultsBtn.innerHTML = 'Results';
-            resultsBtn.onclick = function() { location.href = `Results.html?surveyId=${index}`; };
-            
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'btn btn-outline-danger btn-space';
-            deleteBtn.innerHTML = 'Delete';
-            deleteBtn.onclick = function() { 
-                if (confirm('Are you sure you want to delete this survey forever?')) {
-                    surveys.splice(index, 1);
-                    localStorage.setItem('surveys', JSON.stringify(surveys));
-                    location.reload();
-                }
-            };
-            
-            buttons.appendChild(editBtn);
-            buttons.appendChild(shareBtn);
-            buttons.appendChild(resultsBtn);
-            buttons.appendChild(deleteBtn);
-            
-            surveyElement.appendChild(details);
-            surveyElement.appendChild(buttons);
-            
-            surveyList.appendChild(surveyElement);
-        });
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}

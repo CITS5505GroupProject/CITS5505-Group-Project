@@ -22,15 +22,15 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('text', sa.String(length=255), nullable=False),
     sa.Column('question_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['question_id'], ['question.id'], ),
+    sa.ForeignKeyConstraint(['question_id'], ['question.id'], name="option_question_fk"),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user_answer',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('option_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['option_id'], ['option.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['option_id'], ['option.id'], name="useranswer_option_fk"),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], name="useranswer_user_fk"),
     sa.PrimaryKeyConstraint('id')
     )
     op.drop_table('response')
@@ -52,15 +52,15 @@ def downgrade():
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('text', sa.VARCHAR(length=255), nullable=False),
     sa.Column('question_id', sa.INTEGER(), nullable=False),
-    sa.ForeignKeyConstraint(['question_id'], ['question.id'], ),
+    sa.ForeignKeyConstraint(['question_id'], ['question.id'], name="answer_question_fk"),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('response',
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('user_id', sa.INTEGER(), nullable=False),
     sa.Column('answer_id', sa.INTEGER(), nullable=False),
-    sa.ForeignKeyConstraint(['answer_id'], ['answer.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['answer_id'], ['answer.id'], name="response_answer_fk"),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], name="response_user_fk"),
     sa.PrimaryKeyConstraint('id')
     )
     op.drop_table('user_answer')
