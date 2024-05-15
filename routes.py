@@ -123,7 +123,7 @@ def create_survey():
             questions[question_text] = options
             i += 1
         db.session.commit()
-        return redirect(url_for('take_survey', survey_id = new_survey.id))
+        return redirect(url_for('my_survey', user_id = current_user.id))
 
     return render_template('survey/create_survey.html', form=survey_form)
 
