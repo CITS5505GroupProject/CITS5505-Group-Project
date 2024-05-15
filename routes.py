@@ -122,6 +122,7 @@ def create_survey():
                 j += 1
             questions[question_text] = options
             i += 1
+        current_user.point += 3
         db.session.commit()
         return redirect(url_for('my_survey', user_id = current_user.id))
 
@@ -159,7 +160,7 @@ def take_survey(survey_id):
             if str(field.name).startswith("question_"):
                 user_response = UserAnswer(user_id=current_user.id, option_id=field.data)
                 db.session.add(user_response)
-        
+                current_user.point += 1
         db.session.commit()
         return redirect(url_for('dashboard'))
     
@@ -199,7 +200,7 @@ def survey_dashboard():
 @login_required
 def my_survey(user_id):
     surveys = Survey.query.filter_by(user_id=user_id).all()
-    return render_template('survey/mySurvey.html', surveys=surveys)
+    return render_template('survey/mySurveys.html', surveys=surveys)
 
 @app.route('/survey/delete/<int:survey_id>', methods=['DELETE', 'GET'])
 @login_required
