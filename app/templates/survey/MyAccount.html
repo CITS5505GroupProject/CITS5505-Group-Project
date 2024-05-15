@@ -23,6 +23,7 @@
         overflow-x: hidden;
         padding-top: 20px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-right: 1px solid #dee2e6;
     }
     .sidebar a {
         padding: 12px 16px;
@@ -33,13 +34,19 @@
         align-items: center;
         border-radius: 4px;
         transition: background-color 0.3s, color 0.3s;
+        margin-bottom:8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
     .sidebar a:hover {
         background-color: #e9ecef;
         color: #0056b3;
     }
+    .sidebar a.active {
+        background-color: #0056b3;
+        color: #fff;
+    }
     .content {
-        margin-left: 250px;
+        margin-left: 260px;
         padding: 1rem;
     }
     .icon {
@@ -49,35 +56,71 @@
     .btn-space {
         margin-right: 5px;
     }
+    .container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-left: 260px;
+            padding: 20px;
+            margin-top: 50px;
+            transition: margin-left 0.3s;
+            width: calc(100% - 280px); 
+    }
+
+    @media (max-width: 768px) {
+            .sidebar {
+                width: 100%; 
+                height: auto; 
+                position: relative;
+            }
+
+            .container {
+                margin-left: 0; 
+                width: 100%;
+            }
+    }
+    .readonly-input {
+        background-color: #e9ecef; 
+        color: #495057; 
+    }
+    .img-fluid.rounded-circle {
+        width: 150px;  
+        height: 150px; 
+        object-fit: contain; 
+        border-radius: 50%;
+        border: 2px solid #dee2e6;
+    }
+
 </style>
 </head>
 <body>
 <div class="sidebar bg-light">
-    <a href="MySurvey.html"><i class="bi bi-journal-text icon"></i>My Surveys</a>
-    <a href="MyAccount.html"><i class="bi bi-heart icon"></i>My Account</a>
-    <a href="Setting.html"><i class="bi bi-trash icon"></i>Setting</a>
+    <a href="mySurveys.html"><i class="bi bi-journal-text icon"></i>My Surveys</a>
+    <a href="myAccount.html"><i class="bi bi-heart icon"></i>My Account</a>
+    <a href="Setting.html"><i class="bi bi-gear icon"></i>Setting</a>
 </div>
-<div class="container">
-    <h2 class="mb-3">My Account</h2>
-    <div class="mb-3">
-        <img id="profilePreview" src="https://via.placeholder.com/150" alt="Profile Image Preview">
-        <span id="displayName">SurveyStreamUser001</span>
+
+<div class="container d-flex flex-column align-items-center p-4">
+    <div class="mb-3 text-center">
+        <img id="profilePreview" src="https://via.placeholder.com/150" alt="Profile Image Preview" class="img-fluid rounded-circle">
+        <div id="displayName" class="fw-bold fs-5 mt-2">SurveyStreamUser001</div>
     </div>
-    <div class="mb-3">
-        <label for="profileImage" class="form-label">Profile Image</label>
+    <div class="mb-3 w-75">
+        <label for="profileImage" class="form-label"><strong>Profile Image</strong></label>
         <input class="form-control" type="file" id="profileImage" onchange="previewImage()">
     </div>
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
+    <div class="mb-3 w-75">
+        <label for="name" class="form-label"><strong>Name</strong></label>
         <input type="text" class="form-control" id="name" placeholder="Enter your name">
     </div>
-    <div class="mb-3">
-        <label for="email" the="form-label">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Email" readonly>
+    <div class="mb-3 w-75">
+        <label for="email" the="form-label"><strong>Email</strong></label>
+        <input type="email" class="form-control readonly-input" id="email" placeholder="Email" readonly>
     </div>
-    <div class="mb-3">
-        <label for="points" class="form-label">Points</label>
-        <input type="text" class="form-control" id="points" placeholder="Points" readonly>
+    <div class="mb-3 w-75">
+        <label for="points" class="form-label"><strong>Points</strong></label>
+        <input type="text" class="form-control readonly-input" id="points" placeholder="Points" readonly>
     </div>
     <button type="submit" class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
 </div>
@@ -88,7 +131,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const userData = {
         email: "user@example.com",
-        points: 120,
+        points: 233,
         profileImageUrl: "https://via.placeholder.com/150"
     };
 
@@ -97,28 +140,18 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('profilePreview').src = userData.profileImageUrl;
     loadProfileUpdateLimits();
 });
-
 function previewImage() {
     var file = document.getElementById("profileImage").files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
         var img = new Image();
         img.onload = function() {
-            var maxWidth = 150;
-            var maxHeight = 150;
-
             var canvas = document.createElement("canvas");
             var ctx = canvas.getContext("2d");
-
-            var ratio = Math.min(maxWidth / img.width, maxHeight / img.height);
-            var newWidth = img.width * ratio;
-            var newHeight = img.height * ratio;
-
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
-
+            var size = Math.min(img.width, img.height);
+            canvas.width = size;
+            canvas.height = size;
+            ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
             var imgPreview = document.getElementById("profilePreview");
             imgPreview.src = canvas.toDataURL("image/png");
         };
@@ -163,6 +196,14 @@ function updateProfile() {
     saveUpdateLimits();
     alert('Profile updated successfully!');
 }
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+const currentPage = window.location.pathname.split('/').pop().toLowerCase();
+sidebarLinks.forEach(link => {
+    const page = link.getAttribute('href').split('/').pop().toLowerCase();
+    if (page === currentPage) {
+        link.classList.add('active');
+    }
+});
 </script>
 </body>
 </html>
