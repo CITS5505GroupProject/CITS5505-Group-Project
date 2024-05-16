@@ -3,7 +3,6 @@
     line-height: 1.5;
     font-weight: 400;
     color: black;
-    background-color: whitesmoke;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -23,7 +22,7 @@ body {
     border-radius: 50%;
     will-change: transform;
     position: absolute;
-    z-index: 1;
+    z-index: 1 ;
     top: 0;
     left: 0;
     transform-origin: left top;

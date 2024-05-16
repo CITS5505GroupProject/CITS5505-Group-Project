@@ -4,62 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
-    <link rel="stylesheet" href="ranking.css">
-    <script src="ranking.js" defer></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style/ranking.css">
+    <script src="../static/js/ranking.js" defer></script>
 </head>
 <body>
-    <div class="content">
+    <div class="content container">
         <h1>Leaderboard</h1>
-        <p>🏆 You are currently ranked 1st 🏆</p>
-        <table id="leaderboard">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Username</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Example data -->
-                <tr><td>1🏅</td><td>User1</td><td>1234</td></tr>
-                <tr><td>2🥈</td><td>User2</td><td>1200</td></tr>
-                <tr><td>3🥉</td><td>User3</td><td>1150</td></tr>
-                <tr><td>4</td><td>User4</td><td>1100</td></tr>
-                <tr><td>5</td><td>User5</td><td>1050</td></tr>
-                <tr><td>6</td><td>User6</td><td>1000</td></tr>
-                <tr><td>7</td><td>User7</td><td>950</td></tr>
-                <tr><td>8</td><td>User8</td><td>900</td></tr>
-                <tr><td>9</td><td>User9</td><td>850</td></tr>
-                <tr><td>10</td><td>User10</td><td>800</td></tr>
-                <tr><td>11</td><td>User11</td><td>800</td></tr>
-                <tr><td>12</td><td>User12</td><td>800</td></tr>
-                <tr><td>13</td><td>User13</td><td>800</td></tr>
-                <tr><td>14</td><td>User14</td><td>800</td></tr>
-                <tr><td>15</td><td>User15</td><td>800</td></tr>
-                <tr class="extra-row"><td>16</td><td>User16</td><td>750</td></tr>
-                <tr class="extra-row"><td>17</td><td>User17</td><td>700</td></tr>
-                <tr class="extra-row"><td>18</td><td>User18</td><td>650</td></tr>
-                <tr class="extra-row"><td>19</td><td>User19</td><td>600</td></tr>
-                <tr class="extra-row"><td>20</td><td>User20</td><td>550</td></tr>
-                <tr class="extra-row"><td>21</td><td>User21</td><td>500</td></tr>
-                <tr class="extra-row"><td>22</td><td>User22</td><td>450</td></tr>
-                <tr class="extra-row"><td>23</td><td>User23</td><td>400</td></tr>
-                <tr class="extra-row"><td>24</td><td>User24</td><td>350</td></tr>
-                <tr class="extra-row"><td>25</td><td>User25</td><td>300</td></tr>
-            </tbody>
-        </table>
-        <button class="load-more">Load More</button>
-        <div class="dropdown">
-            <button class="dropbtn">Get More Points⭐️</button>
-            <div class="dropdown-content">
-                <a href="/myforms">Go to My Forms</a>
-                <a href="/otherforms">Go to Other Forms</a>
-            </div>
+        <p class="current-rank">🏆 You are currently ranked 1st 🏆</p>
+        <div class="table-responsive">
+            <table id="leaderboard" class="table table-hover table-bordered shadow rounded-3 list__table">
+                <thead>
+                    <tr class="list__header">
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Displaying top 10 users with avatars -->
+                    <tr class="list__row">
+                        <td class="list__cell"><strong>1🏅</strong></td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User1's Avatar" class="avatar"> User1</td>
+                        <td class="list__cell">1234</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell"><strong>2🥈</strong></td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User2's Avatar" class="avatar"> User2</td>
+                        <td class="list__cell">1200</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell"><strong>3🥉</strong></td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User3's Avatar" class="avatar"> User3</td>
+                        <td class="list__cell">1150</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell">4</td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User4's Avatar" class="avatar"> User4</td>
+                        <td class="list__cell">1100</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell">5</td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User5's Avatar" class="avatar"> User5</td>
+                        <td class="list__cell">1050</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell">6</td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User6's Avatar" class="avatar"> User6</td>
+                        <td class="list__cell">1000</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell">7</td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User7's Avatar" class="avatar"> User7</td>
+                        <td class="list__cell">950</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell">8</td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User8's Avatar" class="avatar"> User8</td>
+                        <td class="list__cell">900</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell">9</td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User9's Avatar" class="avatar"> User9</td>
+                        <td class="list__cell">850</td>
+                    </tr>
+                    <tr class="list__row">
+                        <td class="list__cell">10</td>
+                        <td class="list__cell"><img src="https://via.placeholder.com/40" alt="User10's Avatar" class="avatar"> User10</td>
+                        <td class="list__cell">800</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <button class="accordion">Ranking Criteria</button>
+        <button onclick="location.href='/otherforms'" class="circle-button">Get More Points ⭐️</button>
         <div class="panel">
-            <p>Here are the details about how the points are calculated...</p>
+            <h2 class="criteria-title">Ranking Criteria</h2><br>
+            <p>Our ranking system is designed to recognize and reward active participation within our community. Here's how you can earn points:
+                Submit Surveys: Earn 5 points for each survey you publish.
+                Complete Surveys: Earn 2 points for each survey you complete for others.
+                Your total score is calculated based on these actions, allowing you to climb the leaderboard and showcase your contribution to the community.</p><br>
         </div>
     </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
