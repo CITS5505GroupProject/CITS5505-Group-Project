@@ -48,7 +48,7 @@ def login():
 
         if user and user.check_password(pwd):
             login_user(user)
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('update_profile', user_id = current_user.id))
         else:
             flash('Username or email is incorrect, try again.', 'danger')
     return render_template('user/login.html', title='Login', form=form)
@@ -217,3 +217,12 @@ def delete_survey(survey_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": "An error occurred while deleting the survey.", "error": str(e)}), 500
+    
+@app.route('/leaderboard')
+def leaderboard():
+    top10 = User.query.order_by(User.point.desc()).limit(10).all()
+    return render_template('ranking.html', top10 = top10)
+
+@app.route('/about-us')
+def about_us():
+    return render_template('aboutus.html')

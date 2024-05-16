@@ -1,4 +1,4 @@
-"""empty message
+"""Plan changed, we now only support MCQ question for survey
 
 Revision ID: e491a9ac966e
 Revises: 8a2e39135d8a
