@@ -30,7 +30,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'username': self.username,
-            'profilePic': self.profilePic
+            'profilePic': self.profilePic,
+            'point': self.point
         }
 
     def __repr__(self):
