@@ -1,10 +1,37 @@
-<html>
-    <head>
-        <title>
-            {{ title }}
-        </title>
-    </head>
-    <body>
-        <p> Hello {{ user.username }}, your DoB is {{ user.DoB }}</p>
-    </body>
-</html>
+
+
+{% extends 'navbar/navbar.html' %}
+
+{% set exclude_bootstrap = True %}
+
+{% block extra_css %}
+  <link href="{{ url_for('static', filename = 'style/intro.css') }}" rel="stylesheet" >
+{% endblock %}
+{% block content %}
+<body>
+    <div class="bouncing-blobs-container">
+        <div class="bouncing-blobs-glass"></div>
+        <div class="bouncing-blobs">
+          <div class="bouncing-blob bouncing-blob--blue"></div>
+          <div class="bouncing-blob bouncing-blob--blue"></div>
+          <div class="bouncing-blob bouncing-blob--blue"></div>
+          <div class="bouncing-blob bouncing-blob--purple"></div>
+          <div class="bouncing-blob bouncing-blob--purple"></div>
+          <div class="bouncing-blob bouncing-blob--pink"></div>
+        </div>
+      </div>
+      <div class="hero">
+        <h2>Survey Stream <br>Survey the World</h2>
+        <p>Shape the Future with Every Survey</p>
+        <div class="tutorial-link">
+          <a href="./survey/MySurveys.html" target="_blank" rel="noopener noreferer">
+            Start For Free<i class="bi bi-arrow-right-circle-fill"></i>
+          </a>
+        </div>
+      </div>
+</body>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/intro.js') }}"></script>
+{% endblock %}

@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
     profilePic = db.Column(db.String(255), default="user_profile/user_default.png") #path to save the file
     surveys = db.relationship('Survey', backref='creator', cascade="all, delete-orphan")
+    point = db.Column(db.Integer, default=0, nullable=False)
     user_answers = db.relationship('UserAnswer', backref='answered', cascade="all, delete-orphan")
 
     def set_password(self, password):
