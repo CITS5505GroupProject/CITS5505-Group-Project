@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, RadioField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, RadioField, TextAreaField, SelectField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from flask_wtf.file import FileAllowed, FileField
 
@@ -22,8 +22,21 @@ class registrationForm(FlaskForm):
 
 # Create a survey
 class createSurveyForm(FlaskForm):
+    survey_types = [
+        ('business', 'Business'),
+        ('education', 'Education'),
+        ('healthcare', 'Healthcare'),
+        ('technology', 'Technology'),
+        ('entertainment', 'Entertainment'),
+        ('social', 'Social'),
+        ('politcs', 'Politcs'),
+        ('science', 'Science'),
+        ('environment', 'Environment'),
+        ('personal_development', 'Personal Development')
+    ]
     title = StringField('Title', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
+    surveyType = SelectField('Select a type', choices=survey_types, validators=[DataRequired()])
     submit = SubmitField('Create')
 
 # Update User profile
