@@ -1,0 +1,36 @@
+{% extends 'navbar/navSidebar.html' %}
+{% block content %}
+<div class="content">
+    <h2>Survey Result</h2>
+    <div class="container">
+        <hr>
+        <h3>{{ survey.title }}</h3>
+        <p><strong>Description:</strong> {{ survey.description }}</p>
+        <p><strong>Type:</strong> {{ survey.type }}</p>
+        <p><strong>Created At:</strong> {{ survey.created_at }}</p>
+        {% for question_id, question in survey.questions.items() %}
+            <div class="mt-4">
+                <hr>
+                <h5>{{ question.text }}</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th>Number of Selections</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for option in question.options %}
+                            <tr>
+                                <td>{{ option.text }}</td>
+                                <td>{{ option.selection_count }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
