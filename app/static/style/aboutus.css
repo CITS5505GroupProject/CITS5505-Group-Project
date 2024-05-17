@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-body, h1, h2, h3, p {
+/* body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-}
+} */
 
-h1, h3 {
+/* h1, h3 {
     font-family: 'Orbitron', sans-serif;
+} */
+
+h3{
+    font-size:larger;
 }
 
 body {
@@ -63,6 +67,12 @@ body {
 
 .card-content h3 {
     text-align: center;
+    margin-bottom: 20px;
+
+}
+
+.contact-us{
+    text-align: center;
 }
 
 .accordion {
@@ -94,6 +104,7 @@ body {
 .email-button-container {
     display: flex;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .email-button {
