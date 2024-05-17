@@ -29,19 +29,19 @@
             <div class="collapse navbar-collapse" id="niceNav">
                 <ul class="navbar-nav justify-content-center me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('index')}}">Home</a>
+                        <a class="nav-link" href="{{ url_for('main.index')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('survey_dashboard') }}">Surveys</a>
+                      <a class="nav-link" href="{{ url_for('main.survey_dashboard') }}">Surveys</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('create_survey') }}">Create Survey</a>
+                        <a class="nav-link" href="{{ url_for('main.create_survey') }}">Create Survey</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('leaderboard') }}">Leaderboard</a>
+                        <a class="nav-link" href="{{ url_for('main.leaderboard') }}">Leaderboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('about_us') }}">About us</a>
+                        <a class="nav-link" href="{{ url_for('main.about_us') }}">About us</a>
                     </li>
                 </ul>
 
@@ -50,9 +50,9 @@
                         <li class="nav-item dropdown">
                             <a class="btn btn-outline-success dropdown-toggle me-lg-2 mb-2 mb-lg-0 d-block d-lg-inline-block w-100 w-lg-auto text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >Hello, {{ current_user.username }}</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ url_for('my_survey', user_id = current_user.id) }}">My Surveys</a></li>
-                                <li><a class="dropdown-item" href="{{ url_for('update_profile', user_id = current_user.id) }}">My Account</a></li>
-                                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Log Out</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('main.my_survey', user_id = current_user.id) }}">My Surveys</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('main.update_profile', user_id = current_user.id) }}">My Account</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('main.logout') }}">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

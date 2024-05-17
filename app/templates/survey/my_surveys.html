@@ -6,7 +6,7 @@
     <h2>My Surveys</h2>
     <div class="container mt-3">
         <div class="d-flex justify-content-between mb-3">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('create_survey') }}">+ New Survey</a>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('main.create_survey') }}">+ New Survey</a>
         </div>
         <div class="list-group" id="surveyList">
             {% for survey in surveys %}
@@ -16,8 +16,8 @@
                         <small>created by: {{survey.created_at}} </small>
                     </div>
                     <div>
-                        <a class="btn btn-outline-primary btn-space" href="{{ url_for('survey_result', survey_id=survey.id) }}">View Result</a>
-                        <a class="btn btn-outline-danger btn-space" href="{{ url_for('delete_survey', survey_id=survey.id) }}">Delete</a>
+                        <a class="btn btn-outline-primary btn-space" href="{{ url_for('main.survey_result', survey_id=survey.id) }}">View Result</a>
+                        <a class="btn btn-outline-danger btn-space" href="{{ url_for('main.delete_survey', survey_id=survey.id) }}">Delete</a>
                     </div>
                 </div>
             {% else %}

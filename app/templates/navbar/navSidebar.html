@@ -22,37 +22,37 @@
                     <i class="lni lni-grid-alt"></i>
                 </button>
                 <div class="sidebar-logo">
-                    <a href="{{ url_for('index') }}">Survey Stream</a>
+                    <a href="{{ url_for('main.index') }}">Survey Stream</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="{{url_for('update_profile', user_id=current_user.id)}}" class="sidebar-link">
+                    <a href="{{url_for('main.update_profile', user_id=current_user.id)}}" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Profile</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ url_for('my_survey', user_id = current_user.id) }}" class="sidebar-link">
+                    <a href="{{ url_for('main.my_survey', user_id = current_user.id) }}" class="sidebar-link">
                         <i class="lni lni-agenda"></i>
                         <span>My Survey</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{url_for('create_survey')}}" class="sidebar-link">
+                    <a href="{{url_for('main.create_survey')}}" class="sidebar-link">
                         <i class="lni lni-support"></i>
                         <span>Create Survey</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url_for('change_password', user_id=current_user.id)}}" class="sidebar-link">
+                    <a href="{{url_for('main.change_password', user_id=current_user.id)}}" class="sidebar-link">
                         <i class="lni lni-key"></i>
                         <span>Change Password</span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="{{url_for('logout')}}" class="sidebar-link">
+                <a href="{{url_for('main.logout')}}" class="sidebar-link">
                     <i class="lni lni-exit"></i>
                     <span>Logout</span>
                 </a>

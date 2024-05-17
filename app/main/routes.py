@@ -1,22 +1,22 @@
 from flask import render_template, redirect, url_for, flash, request, jsonify
-from app import app, db, os, mail
-from models import User, Survey, Question, Option, UserAnswer
-from forms import registrationForm, loginForm, createSurveyForm, RadioField, SubmitField, updateProfileForm, DataRequired, FlaskForm, ResetPasswordForm, ChangePasswordForm
+from app import db, os, mail
+from app.models import User, Survey, Question, Option, UserAnswer
+from app.forms import registrationForm, loginForm, createSurveyForm, RadioField, SubmitField, updateProfileForm, DataRequired, FlaskForm, ResetPasswordForm, ChangePasswordForm
 from sqlalchemy.exc import IntegrityError
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 import random
 from flask_mail import Message
 from sqlalchemy import func
+from app.main import main
 
-
-@app.route('/')
-@app.route('/index')
+@main.route('/')
+@main.route('/index')
 def index():
     user = {'username':'Tony', 'DoB':'10/12/2001'}
     return render_template('/index.html', title = 'Home Page', user = user)
 
-@app.route('/register', methods=['GET', 'POST'])
+@main.route('/register', methods=['GET', 'POST'])
 def register():
     form = registrationForm()
     if form.validate_on_submit():
@@ -26,13 +26,13 @@ def register():
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('login'))
+            return redirect(url_for('main.login'))
         except IntegrityError:
             db.session.rollback()
             flash('Username or email already exists. Please use a different one.', 'danger')
     return render_template('user/register.html', title='Register', form=form)
 
-@app.route('/login', methods=['GET', 'POST'])
+@main.route('/login', methods=['GET', 'POST'])
 def login():
     form = loginForm()
     if form.validate_on_submit():
@@ -42,17 +42,17 @@ def login():
 
         if user and user.check_password(pwd):
             login_user(user)
-            return redirect(url_for('update_profile', user_id = current_user.id))
+            return redirect(url_for('main.update_profile', user_id = current_user.id))
         else:
             flash('Username or email is incorrect, try again.', 'danger')
     return render_template('user/login.html', title='Login', form=form)
 
-@app.route('/logout')
+@main.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
-@app.route('/reset-password', methods = ['GET', 'POST'])
+@main.route('/reset-password', methods = ['GET', 'POST'])
 def reset_password():
     form = ResetPasswordForm()
     if form.validate_on_submit():
@@ -69,13 +69,13 @@ def reset_password():
             print(new_password)
             mail.send(msg)
             flash("A reset password has been sent to your email!", "success")
-            return redirect(url_for('login'))
+            return redirect(url_for('main.login'))
         else:
             flash("Email not exist. Try again...", 'danger')
         
     return render_template('user/reset_password.html', form = form)
 
-@app.route('/change-password/<int:user_id>', methods=['GET', 'POST'])
+@main.route('/change-password/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def change_password(user_id):
     form = ChangePasswordForm()
@@ -87,10 +87,10 @@ def change_password(user_id):
             flash("Password changed successfully!", "success")
         else:
             flash("Current password is incorrect, try again...", "danger")
-            redirect(url_for('change_password', user_id = user_id))
+            redirect(url_for('main.change_password', user_id = user_id))
     return render_template('user/change_password.html', form=form)
 
-@app.route('/survey/create-survey', methods=['GET', 'POST'])
+@main.route('/survey/create-survey', methods=['GET', 'POST'])
 @login_required
 def create_survey():
     survey_form = createSurveyForm()
@@ -118,7 +118,7 @@ def create_survey():
             i += 1
         current_user.point += 3
         db.session.commit()
-        return redirect(url_for('my_survey', user_id = current_user.id))
+        return redirect(url_for('main.my_survey', user_id = current_user.id))
 
     return render_template('survey/create_survey.html', form=survey_form)
 
@@ -139,7 +139,7 @@ def create_survey_form(survey_id):
     
     return DynamicSurveyForm()
 
-@app.route('/take-survey/<int:survey_id>', methods=['GET', 'POST'])
+@main.route('/take-survey/<int:survey_id>', methods=['GET', 'POST'])
 @login_required
 def take_survey(survey_id):
     form = create_survey_form(survey_id)
@@ -156,11 +156,11 @@ def take_survey(survey_id):
                 db.session.add(user_response)
                 current_user.point += 1
         db.session.commit()
-        return redirect(url_for('survey_dashboard'))
+        return redirect(url_for('main.survey_dashboard'))
     
     return render_template('survey/take_survey.html', form=form, survey=survey)
 
-@app.route('/update_profile/<int:user_id>', methods=['GET', 'POST'])
+@main.route('/update_profile/<int:user_id>', methods=['GET', 'POST'])
 def update_profile(user_id):
     if current_user.is_authenticated and current_user.id == user_id:
         user = current_user
@@ -177,26 +177,26 @@ def update_profile(user_id):
             
             user.username = form.username.data
             db.session.commit()
-            return redirect(url_for('update_profile', user_id=user_id))
+            return redirect(url_for('main.update_profile', user_id=user_id))
 
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('main.login'))
     
     return render_template('survey/update_profile.html', form=form, profile_url=profile_url)
 
-@app.route('/survey-dashboard')
+@main.route('/survey-dashboard')
 def survey_dashboard():
     surveys = Survey.query.all()
     surveys_data = [survey.to_dict() for survey in surveys]
     return render_template('survey/survey_dashboard.html', surveys=surveys_data)
 
-@app.route('/my-survey/<int:user_id>', methods=['GET'])
+@main.route('/my-survey/<int:user_id>', methods=['GET'])
 @login_required
 def my_survey(user_id):
     surveys = Survey.query.filter_by(user_id=user_id).all()
     return render_template('survey/my_surveys.html', surveys=surveys)
 
-@app.route('/survey/delete/<int:survey_id>', methods=['DELETE', 'GET'])
+@main.route('/survey/delete/<int:survey_id>', methods=['DELETE', 'GET'])
 @login_required
 def delete_survey(survey_id):
     survey = Survey.query.get(survey_id)
@@ -207,21 +207,21 @@ def delete_survey(survey_id):
         db.session.delete(survey)
         db.session.commit()
         flash("Survey deleted successfully", "success")
-        return redirect(url_for('my_survey', user_id=current_user.id))
+        return redirect(url_for('main.my_survey', user_id=current_user.id))
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": "An error occurred while deleting the survey.", "error": str(e)}), 500
     
-@app.route('/leaderboard')
+@main.route('/leaderboard')
 def leaderboard():
     top10 = User.query.order_by(User.point.desc()).limit(10).all()
     return render_template('ranking.html', top10 = top10)
 
-@app.route('/about-us')
+@main.route('/about-us')
 def about_us():
     return render_template('aboutus.html')
 
-@app.route('/survey/<int:survey_id>')
+@main.route('/survey/<int:survey_id>')
 def survey_result(survey_id):
     survey = Survey.query.get_or_404(survey_id)
 

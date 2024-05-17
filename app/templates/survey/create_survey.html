@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <h2>Create a New Survey</h2>
-                <form method="POST" action="{{ url_for('create_survey') }}" id="survey-form">
+                <form method="POST" action="{{ url_for('main.create_survey') }}" id="survey-form">
                     {{ form.hidden_tag() }}
                     <div class="mb-3">
                         {{ form.title.label(class="form-label") }}
