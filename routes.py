@@ -32,13 +32,6 @@ def register():
             flash('Username or email already exists. Please use a different one.', 'danger')
     return render_template('user/register.html', title='Register', form=form)
 
-@app.route('/dashboard')
-def dashboard():
-    if current_user.is_authenticated:
-        return render_template('dashboard.html', username=current_user.username)
-    else:
-        return redirect(url_for('login'))
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = loginForm()
@@ -201,7 +194,7 @@ def survey_dashboard():
 @login_required
 def my_survey(user_id):
     surveys = Survey.query.filter_by(user_id=user_id).all()
-    return render_template('survey/mySurveys.html', surveys=surveys)
+    return render_template('survey/my_surveys.html', surveys=surveys)
 
 @app.route('/survey/delete/<int:survey_id>', methods=['DELETE', 'GET'])
 @login_required
