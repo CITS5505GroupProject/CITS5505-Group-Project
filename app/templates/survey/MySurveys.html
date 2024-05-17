@@ -15,7 +15,7 @@
                         <small>created by: {{survey.created_at}} </small>
                     </div>
                     <div>
-                        <a class="btn btn-outline-primary btn-space">View Result</a>
+                        <a class="btn btn-outline-primary btn-space" href="{{ url_for('survey_result', survey_id=survey.id) }}">View Result</a>
                         <a class="btn btn-outline-danger btn-space" href="{{ url_for('delete_survey', survey_id=survey.id) }}">Delete</a>
                     </div>
                 </div>

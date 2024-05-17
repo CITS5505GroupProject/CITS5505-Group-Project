@@ -1,4 +1,5 @@
 {% extends "navbar/navbar.html" %}
+{% set visible=True %}
 {% block content %}
 <div class="container mt-3">
     <!-- Search Bar -->
@@ -86,7 +87,7 @@
                             <p class="card-text">${survey.description}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between align-items-center">
-                            <a class="btn btn-info" href="/take_survey/${survey.id}">Answer</a> 
+                            <a class="btn btn-info" href="/take-survey/${survey.id}">Answer</a> 
                         </div>
                     </div>
                 `;

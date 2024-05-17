@@ -7,6 +7,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 import random
 from flask_mail import Message
+from sqlalchemy import func
 
 
 @app.route('/')
@@ -48,7 +49,7 @@ def login():
 
         if user and user.check_password(pwd):
             login_user(user)
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('update_profile', user_id = current_user.id))
         else:
             flash('Username or email is incorrect, try again.', 'danger')
     return render_template('user/login.html', title='Login', form=form)
@@ -162,7 +163,7 @@ def take_survey(survey_id):
                 db.session.add(user_response)
                 current_user.point += 1
         db.session.commit()
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('survey_dashboard'))
     
     return render_template('survey/take_survey.html', form=form, survey=survey)
 
@@ -217,3 +218,54 @@ def delete_survey(survey_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": "An error occurred while deleting the survey.", "error": str(e)}), 500
+    
+@app.route('/leaderboard')
+def leaderboard():
+    top10 = User.query.order_by(User.point.desc()).limit(10).all()
+    return render_template('ranking.html', top10 = top10)
+
+@app.route('/about-us')
+def about_us():
+    return render_template('aboutus.html')
+
+@app.route('/survey/<int:survey_id>')
+def survey_result(survey_id):
+    survey = Survey.query.get_or_404(survey_id)
+
+    # Query to get questions, options, and the count of user answers for each option
+    results = db.session.query(
+        Question.id.label('question_id'),
+        Question.text.label('question_text'),
+        Option.id.label('option_id'),
+        Option.text.label('option_text'),
+        func.count(UserAnswer.id).label('selection_count')
+    ).join(Option, Option.question_id == Question.id)\
+     .outerjoin(UserAnswer, UserAnswer.option_id == Option.id)\
+     .filter(Question.survey_id == survey_id)\
+     .group_by(Question.id, Option.id)\
+     .all()
+
+    # Organize the data into a structured format
+    survey_data = {
+        'id': survey.id,
+        'title': survey.title,
+        'description': survey.description,
+        'type': survey.type,
+        'created_at': survey.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+        'questions': {}
+    }
+
+    for row in results:
+        question_id = row.question_id
+        if question_id not in survey_data['questions']:
+            survey_data['questions'][question_id] = {
+                'text': row.question_text,
+                'options': []
+            }
+        survey_data['questions'][question_id]['options'].append({
+            'id': row.option_id,
+            'text': row.option_text,
+            'selection_count': row.selection_count
+        })
+
+    return render_template('survey/survey_result.html', survey=survey_data)
