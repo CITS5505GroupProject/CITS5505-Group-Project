@@ -24,6 +24,7 @@
                         <strong>{{ field.label }}</strong>
                         {% for subfield in field %}
                             <div class="form-check">
+                                <!-- Display the subfield (input) and its label -->
                                 <label class="form-check-label">
                                     {{ subfield }} {{ subfield.label.text }}
                                 </label><br>
@@ -33,6 +34,7 @@
                 {% endif %}
             {% endfor %}
         </div>
+    <!-- Submit button for the form -->
     <div class="submit-botton">
         {{ form.submit(class="btn btn-primary") }}
     </div>
