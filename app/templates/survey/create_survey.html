@@ -1,6 +1,5 @@
 {% extends 'navbar/navSidebar.html' %}
 {% block title %} Create Survey {% endblock %}
-{% block extra_js %}<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>{% endblock %}
     {% block content %}
     <div class="container mt-4">
         <div class="card">
@@ -31,5 +30,6 @@
 
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/create_survey.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock %}
     
