@@ -116,7 +116,7 @@ def create_survey():
                 j += 1
             questions[question_text] = options
             i += 1
-        current_user.point += 3
+        current_user.point += 5
         db.session.commit()
         return redirect(url_for('main.my_survey', user_id = current_user.id))
 
@@ -154,7 +154,7 @@ def take_survey(survey_id):
             if str(field.name).startswith("question_"):
                 user_response = UserAnswer(user_id=current_user.id, option_id=field.data)
                 db.session.add(user_response)
-                current_user.point += 1
+                current_user.point += 2
         db.session.commit()
         return redirect(url_for('main.survey_dashboard'))
     

@@ -48,7 +48,7 @@
                 {% if current_user.is_authenticated %}
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <a class="btn btn-outline-success dropdown-toggle me-lg-2 mb-2 mb-lg-0 d-block d-lg-inline-block w-100 w-lg-auto text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >Hello, {{ current_user.username }}</a>
+                            <a class="btn btn-outline-primary dropdown-toggle me-lg-2 mb-2 mb-lg-0 d-block d-lg-inline-block w-100 w-lg-auto text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >Hello, {{ current_user.username }}</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ url_for('main.my_survey', user_id = current_user.id) }}">My Surveys</a></li>
                                 <li><a class="dropdown-item" href="{{ url_for('main.update_profile', user_id = current_user.id) }}">My Account</a></li>
