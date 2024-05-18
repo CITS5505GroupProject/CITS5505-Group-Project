@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us</title>
-<link rel="stylesheet" href="../static/style/aboutus.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="stylesheet" href="../static/style/aboutus.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+  
 <body>
-
-<div class="content">
-  <h1>About Us</h1>
-  <div class="grid">
-    <!-- Card 1 - Our Goal -->
-    <div class="card flex-row">
-        <img src="https://res.cloudinary.com/dynbwiv3t/image/upload/v1714477459/declan-sun-vJF-hGYyFho-unsplash_ajcars.jpg" alt="Our Goal Image" class="card-img">
-        <div class="card-content">
-            <h3>Our Goal</h3>
-            <p>At our polls and surveys website, our primary objective is to revolutionize the way data is collected and shared. We strive to create a dynamic platform where users can actively engage in the process of gathering valuable insights and information.</p>
-            <!-- Accordion sections -->
-            <button class="accordion">Empowering Users</button>
-            <div class="panel">
-                <p>We aim to empower users by providing them with the tools and resources needed to create, share, and analyze polls and surveys effortlessly. Through intuitive interfaces and seamless functionality, we encourage users to unleash their creativity and curiosity to address diverse topics and questions.</p>
-            </div>
-            <button class="accordion">Facilitating Collaboration</button>
-            <div class="panel">
-                <p>Our goal is to foster a collaborative environment where users can connect, collaborate, and learn from one another. By offering a comprehensive dashboard filled with a myriad of polls and surveys contributed by fellow users, we facilitate knowledge exchange and community-driven exploration.</p>
-            </div>
-            <button class="accordion">Promoting Transparency</button>
-            <div class="panel">
-                <p>Transparency is at the core of our mission. We believe in the importance of sharing survey and poll results openly and transparently. Through our platform, users can not only collect data but also share and visualize the results in a clear and comprehensible manner, fostering transparency and accountability.</p>
-            </div>
-            <!-- End of accordion sections -->
+    <!-- What We Do Section-->
+<section class="section-padding">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h2 class="mission-text">What We Do</h2>
+          <p>Our website provides a user-friendly platform for creating, sharing, and responding to surveys. Whether you’re an individual seeking opinions, a researcher conducting a study, or a business collecting customer feedback, our tools make it easy to design and distribute surveys and collect responses efficiently. We enable users to gather meaningful data, understand trends, and make informed decisions through impactful surveys.</p>
         </div>
-    </div>  
-    <!-- Card 2 - Our Story -->
-    <div class="card flex-row-reverse">
-        <img src="https://res.cloudinary.com/dynbwiv3t/image/upload/v1714477445/christina-wocintechchat-com-03hBSIiFikE-unsplash_gmg2ha.jpg" alt="Our Story Image" class="card-img">
-        <div class="card-content">
-            <h3>Our Story</h3>
-            <p>As a team of four dedicated students, we embarked on this project with a singular vision: to create a platform that not only facilitates easy and efficient data collection but also fosters an environment where shared insights pave the way for collective intelligence. Our website ensures a tailored approach that aligns with our specific academic insights and technical skills.</p>
+        <div class="col-lg-6">
+          <img src="https://res.cloudinary.com/dynbwiv3t/image/upload/v1715938695/marvin-meyer-SYTO3xs06fU-unsplash_ar6edo.jpg" alt="Buildings" class="img-fluid">
         </div>
+      </div>
     </div>
-    <!-- Card 3 - Contact Us -->
-    <div class="card">
-        <div class="card-content">
-            <h3>Contact Us</h3>
-            <p>If you encounter any problems, you can contact us through the following ways and we will help you solve them as soon as possible.</p>
-            <!-- Add button -->
-            <div class="email-button-container">
-                <button class="email-button" onclick="copyEmail()"><i class="fas fa-envelope"></i> support@survey.com</button>
-            </div>
+  </section>
+     
+    <!-- Why We Do It Section -->
+  <section class="section-padding section-bg">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <img src="https://res.cloudinary.com/dynbwiv3t/image/upload/v1715938711/firmbee-com-jrh5lAq-mIs-unsplash_n4ojby.jpg" alt="Analytics" class="img-fluid">
         </div>
+        <div class="col-lg-6">
+          <h2 class="goal-text">Why We Do It</h2>
+          <p>In today's digital age, gathering insights and feedback is crucial for personal and professional growth. Our goal is to facilitate meaningful interactions and data collection, allowing users to gain a deeper understanding of various topics and trends. By offering a platform that supports diverse needs, such as academic research, market analysis, and personal interest surveys, we aim to create a space where knowledge is shared, and collective intelligence is expanded.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
+  
+     <!-- Value Section -->
+  <section class="section-padding">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="mission-text">Our Values</h2>
+            <p>We value collaboration, knowledge-sharing, and user empowerment. Our platform fosters a dynamic community where users can contribute to and benefit from a wealth of diverse perspectives. By participating in surveys, users help build a robust knowledge base that supports continuous learning and growth. We are committed to providing reliable tools and resources that enable users to make informed decisions and drive positive outcomes in both personal and professional spheres.</p>
+          </div>
+          <div class="col-lg-6">
+            <img src="https://res.cloudinary.com/dynbwiv3t/image/upload/v1714477459/declan-sun-vJF-hGYyFho-unsplash_ajcars.jpg" alt="Buildings" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+      <!-- Contact Us Section -->
+      <section class="section-padding section-bg">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <img src="https://res.cloudinary.com/dynbwiv3t/image/upload/v1714477445/christina-wocintechchat-com-03hBSIiFikE-unsplash_gmg2ha.jpg" alt="Analytics" class="img-fluid">
+          </div>
+          <div class="col-lg-6">
+            <h2 class="goal-text">Contact Us</h2>
+            <p>If you encounter any problems or have any questions, you can reach out to us through the following ways, and we will assist you as soon as possible. Our dedicated support team is here to help ensure you have a smooth experience on our platform. Whether you need technical assistance, have feedback, or require additional information, don't hesitate to contact us. We are committed to providing prompt and effective support to address your needs and enhance your user experience.</p>
+          </div>
+          <div class="email-button-container">
+              <button class="email-button" onclick="copyEmail()"><i class="fas fa-envelope"></i> surveystream10@gmail.com</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
 <script src="../static/js/aboutus.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
