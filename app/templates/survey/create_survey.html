@@ -1,26 +1,36 @@
 {% extends 'navbar/navSidebar.html' %}
 {% block title %} Create Survey {% endblock %}
     {% block content %}
+    <!-- Main container for the Create Survey page -->
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">
+                <!-- Header for the form  -->
                 <h2>Create a New Survey</h2>
+                <!-- Form for creating a new survey -->
                 <form method="POST" action="{{ url_for('main.create_survey') }}" id="survey-form">
+                    <!-- Hidden field for CSRF protection -->
                     {{ form.hidden_tag() }}
+                    <!-- Input field for survey title  -->
                     <div class="mb-3">
                         {{ form.title.label(class="form-label") }}
                         {{ form.title(class="form-control") }}
                     </div>
+                    <!-- Input field for survey type  -->
                     <div class="mb-3">
                         {{ form.surveyType.label(class="form-label") }}
                         {{ form.surveyType(class="form-control") }}
                     </div>
+                    <!-- Textarea for survey description -->
                     <div class="mb-3">
                         {{ form.description.label(class="form-label") }}
                         {{ form.description(class="form-control") }}
                     </div>
+                    <!-- Container for dynamically added questions -->
                     <div id="questionsContainer"></div>
+                    <!-- Button to add a new question to the survey -->
                     <button class="btn btn-outline-success mt-3" type="button" onclick="addQuestion()">Add Question</button>
+                    <!-- Submit button for the form -->
                     <p class="mt-3 btn-primary d-flex justify-content-end ">{{ form.submit(class="btn btn-outline-primary") }}</p>
                 </form>
             </div>

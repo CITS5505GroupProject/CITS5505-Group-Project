@@ -13,11 +13,15 @@
 {% block content %}
 <div class="content container">
     <h1>Leaderboard</h1>
+    <!-- Displaying current user's score if authenticated -->
     {% if current_user.is_authenticated %}
     <p class="current-rank">🏆 Your current Score is <strong>{{ current_user.point }}</strong> 🏆</p>
     {% else %}
+    <!-- Prompting users to join if not authenticated -->
     <p class="current-rank mt-3">🏆 <a class="btn btn-outline-primary" href="{{url_for('main.login')}}">Join Us Now!!</a> 🏆</p>
     {% endif %}
+
+    <!-- Table to display the leaderboard -->
     <div class="table-responsive">
         <table id="leaderboard" class="table table-hover table-bordered shadow rounded-3 list__table">
             <thead>
@@ -30,6 +34,7 @@
             <tbody>
                 {% for user in top10 %}
                 <tr class="list__row">
+                    <!-- Displaying rank with a trophy icon for top 3 users -->
                     <td class="list__cell"><strong>
                         {% if loop.index == 1 %}
                             {{ loop.index }} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
@@ -54,13 +59,20 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Button to redirect users to another form for earning more points -->
     <button onclick="location.href='/otherforms'" class="circle-button">Get More Points ⭐️</button>
+
+    <!-- Panel explaining the ranking criteria -->
     <div class="panel">
         <h2 class="criteria-title">Ranking Criteria</h2><br>
-        <p>Our ranking system is designed to recognize and reward active participation within our community. Here's how you can earn points:
-            Submit Surveys: Earn 5 points for each survey you publish.
-            Complete Surveys: Earn 2 points for each survey you complete for others.
-            Your total score is calculated based on these actions, allowing you to climb the leaderboard and showcase your contribution to the community.</p><br>
+        <p>Our ranking system is designed to recognize and reward active participation within our community. Points are earned through the following actions:</p>
+        <ul>
+            <li>Submit Surveys:</li> Earn 5 points for each survey you publish.<br>
+            <li>Complete Surveys:</li> Earn 2 points for each survey you complete for others.<br>
+        </ul>
+            <p>Your total score is calculated based on these activities, allowing you to ascend the leaderboard and demonstrate your valuable contributions to the community.</p>
     </div>
+    
 </div>
 {% endblock %}

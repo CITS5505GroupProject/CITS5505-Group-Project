@@ -6,6 +6,8 @@
         <h3 class="mb-5">Log In</h3>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
+
+            <!-- Email input field -->
             <div class="mb-3">
                 {{ form.email.label(class="form-label") }}
                 {{ form.email(class="form-control") }}
@@ -15,6 +17,8 @@
                     </div>
                 {% endif %}
             </div>
+
+            <!-- Password input field -->
             <div class="mb-3">
                 {{ form.password.label(class="form-label") }}
                 {{ form.password(class="form-control") }}
@@ -24,6 +28,8 @@
                     </div>
                 {% endif %}
             </div>
+
+            <!-- Section for displaying flash messages -->
             <div class="mb-3">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -36,6 +42,8 @@
                 {% endif %}
                 {% endwith %}
             </div>
+
+            <!-- Submit button for the form -->
             <div class="mb-3">
                 {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
             </div>
