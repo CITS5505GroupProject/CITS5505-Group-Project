@@ -16,7 +16,7 @@
     {% if current_user.is_authenticated %}
     <p class="current-rank">🏆 Your current Score is <strong>{{ current_user.point }}</strong> 🏆</p>
     {% else %}
-    <p class="current-rank mt-3">🏆 <a class="btn btn-outline-primary" href="{{url_for('login')}}">Join Us Now!!</a> 🏆</p>
+    <p class="current-rank mt-3">🏆 <a class="btn btn-outline-primary" href="{{url_for('main.login')}}">Join Us Now!!</a> 🏆</p>
     {% endif %}
     <div class="table-responsive">
         <table id="leaderboard" class="table table-hover table-bordered shadow rounded-3 list__table">

@@ -1,4 +1,5 @@
 {% extends 'user/base_user.html' %}
+{% block title %} Login {% endblock %}
 {% block content %}
 <div class="card shadow-lg" style="border-radius: 1rem;">
     <div class="card-body p-5 text-center">
@@ -39,8 +40,8 @@
                 {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
             </div>
             <div class="mb-3">
-                <a href="{{ url_for('register') }}">Sign Up</a><br>
-                <a href="{{ url_for('reset_password') }}">Forget Password?</a>
+                <a href="{{ url_for('main.register') }}">Sign Up</a><br>
+                <a href="{{ url_for('main.reset_password') }}">Forget Password?</a>
             </div>
         </form>
     </div>
