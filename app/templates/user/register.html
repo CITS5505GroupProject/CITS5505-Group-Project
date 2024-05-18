@@ -7,6 +7,8 @@
         <h3 class="mb-5">Sign Up</h3>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
+
+            <!-- Username field -->
             <div class="mb-3">
                 {{ form.username.label(class="form-label") }}
                 {{ form.username(class="form-control") }}
@@ -16,6 +18,8 @@
                     </div>
                 {% endif %}
             </div>
+
+            <!-- Email field -->
             <div class="mb-3">
                 {{ form.email.label(class="form-label") }}
                 {{ form.email(class="form-control") }}
@@ -25,6 +29,8 @@
                     </div>
                 {% endif %}
             </div>
+
+            <!-- Password field -->
             <div class="mb-3">
                 {{ form.password.label(class="form-label") }}
                 {{ form.password(class="form-control") }}
@@ -34,6 +40,8 @@
                     </div>
                 {% endif %}
             </div>
+
+            <!-- Confirm Password field -->
             <div class="mb-3">
                 {{ form.confirm_password.label(class="form-label") }}
                 {{ form.confirm_password(class="form-control") }}
@@ -43,6 +51,8 @@
                     </div>
                 {% endif %}
             </div>
+
+            <!-- Flash messages for general feedback  -->
             <div class="mb-3">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -55,9 +65,13 @@
                 {% endif %}
                 {% endwith %}
             </div>
+
+            <!-- Submit button -->
             <div class="mb-3">
                 {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
             </div>
+
+            <!-- Link to login page for existing users -->
             <div class="mb-3">
                 <a href="{{ url_for('main.login') }}">Already have a account?</a>
             </div>
