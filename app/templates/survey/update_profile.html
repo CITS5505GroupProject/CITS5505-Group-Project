@@ -1,10 +1,8 @@
 {% extends 'navbar/navSidebar.html' %}
 {% block title %} My Profile {% endblock %}
 {% block content %}
-
-
-{% block extra_css%}
-<link rel="stylesheet" href="../../static/style/update_profile.css">
+{% block extra_css %}
+  <link href="{{ url_for('static', filename = 'style/update_profile.css') }}" rel="stylesheet" >
 {% endblock %}
 
 <body>
