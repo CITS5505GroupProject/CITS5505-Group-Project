@@ -31,7 +31,7 @@
     .profileimg {
         width: 150px;  
         height: 150px; 
-        object-fit: contain; 
+        object-fit: cover; 
         border-radius: 50%;
         border: 2px solid #dee2e6;
     }
@@ -43,7 +43,6 @@
 
 </style>
 <body>
-
     <div class="container mt-5 d-flex justify-content-center align-items-center">
         <form method="POST" action="" enctype="multipart/form-data" class="profile-form">
             {{ form.hidden_tag() }}

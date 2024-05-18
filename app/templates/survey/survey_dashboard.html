@@ -5,10 +5,10 @@
 <div class="container mt-3">
     <!-- Search Bar -->
     <div class="mb-3">
-        <input type="text" class="form-control form-control-lg" id="searchInput" onkeyup="searchItems()" placeholder="Search for suvey title..." aria-label="Search">
+        <input type="text" class="form-control" id="searchInput" onkeyup="searchItems()" placeholder="Search for survey title..." aria-label="Search">
     </div>
     <div id="filter-options" class="container">
-        <div class="row row-cols-2 row-cols-md-4 g-2">
+        <div class="row row-cols-2 row-cols-md-5 g-2">
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-education" autocomplete="off" value="education">
                 <label class="btn btn-outline-primary w-100" for="btn-check-education">Education</label>
@@ -47,7 +47,7 @@
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-personal_development" autocomplete="off" value="personal_development">
-                <label class="btn btn-outline-primary w-100" for="btn-check-personal_development">Personal Development</label>
+                <label class="btn btn-outline-primary w-100" for="btn-check-personal_development">Self-Improvement</label>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <img src="static/${survey.creator.profilePic}" class="rounded-circle me-2" width="40" alt="User">
+                                <img src="static/${survey.creator.profilePic}" class="rounded-circle me-2" width="40" height="40" alt="User">
                                 <div>
                                     <h6 class="mb-0">${survey.creator.username}</h6>
                                     <small class="text-muted">Created at: ${survey.created_at}</small>
