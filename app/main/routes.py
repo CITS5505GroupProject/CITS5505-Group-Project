@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request, jsonify
+from flask import render_template, redirect, url_for, flash, request, jsonify, current_app
 from app import db, os, mail
 from app.models import User, Survey, Question, Option, UserAnswer
 from app.forms import registrationForm, loginForm, createSurveyForm, RadioField, SubmitField, updateProfileForm, DataRequired, FlaskForm, ResetPasswordForm, ChangePasswordForm
@@ -169,7 +169,7 @@ def update_profile(user_id):
         if form.validate_on_submit():
             if form.profile_pic.data:
                 filename = secure_filename(form.profile_pic.data.filename)
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                 print(filepath)
                 print(filename)
                 form.profile_pic.data.save(filepath)
