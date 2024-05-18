@@ -5,10 +5,13 @@
 {% block extra_css %}
   <link href="{{ url_for('static', filename = 'style/intro.css') }}" rel="stylesheet" >
 {% endblock %}
+
 {% block content %}
 <body>
+  <!-- Container for bouncing blobs animation -->
     <div class="bouncing-blobs-container">
         <div class="bouncing-blobs-glass"></div>
+        <!-- Bouncing blobs elements -->
         <div class="bouncing-blobs">
           <div class="bouncing-blob bouncing-blob--blue"></div>
           <div class="bouncing-blob bouncing-blob--blue"></div>
@@ -18,6 +21,7 @@
           <div class="bouncing-blob bouncing-blob--pink"></div>
         </div>
       </div>
+      <!-- Hero section with main content -->
       <div class="hero">
         <h2>Survey Stream <br>Survey the World</h2>
         <p>Shape the Future with Every Survey</p>
