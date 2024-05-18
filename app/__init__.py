@@ -36,7 +36,7 @@ def create_app():
     csrf.init_app(app)
     mail.init_app(app)
 
-    login_manager.login_view = 'login'
+    login_manager.login_view = 'main.login'
 
     with app.app_context():
         from . import models
