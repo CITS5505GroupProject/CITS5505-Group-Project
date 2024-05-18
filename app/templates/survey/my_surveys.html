@@ -5,8 +5,8 @@
 <div class="content">
     <h2>My Surveys</h2>
     <div class="container mt-3">
-        <div class="d-flex justify-content-between mb-3">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('main.create_survey') }}">+ New Survey</a>
+        <div class="d-flex justify-content-end mb-3">
+            <a class="btn btn-primary btn-" href="{{ url_for('main.create_survey') }}">+ New Survey</a>
         </div>
         <div class="list-group" id="surveyList">
             {% for survey in surveys %}
