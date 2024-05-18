@@ -12,13 +12,27 @@ login_manager = LoginManager()
 csrf = CSRFProtect()
 mail = Mail()
 
-def create_app():
+class TestConfig:
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    WTF_CSRF_ENABLED = False
+    SECRET_KEY = "TESTING_KEY"
+
+
+def create_app(config_name=None):
     app = Flask(__name__)
+
+    if config_name is None:
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        parent_dir = os.path.dirname(basedir)
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(parent_dir, 'app.db')
+        app.config['SECRET_KEY'] = 'DEPLOY_KEY'
+    else:
+        app.config.from_object(TestConfig)
+
 
     basedir = os.path.abspath(os.path.dirname(__file__))
     parent_dir = os.path.dirname(basedir)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(parent_dir, 'app.db')
-    app.config['SECRET_KEY'] = 'you_will_not_guess'
     app.config['UPLOAD_FOLDER'] = os.path.join(parent_dir, 'app/static/user_profile')
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit
 
