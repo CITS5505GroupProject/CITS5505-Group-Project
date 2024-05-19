@@ -2,6 +2,8 @@ import unittest
 from tests.test_base import BaseTestCase
 
 class SurveyDashboardTestCase(BaseTestCase):
+
+    # test survey dashboard is loaded correctly
     def test_dashboard_page(self):
         response = self.client.get('/survey-dashboard')
         self.assertEqual(response.status_code, 200)

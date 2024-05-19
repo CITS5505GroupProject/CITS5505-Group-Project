@@ -9,12 +9,8 @@ class MySurveyTestCase(BaseTestCase):
             password=password
         ), follow_redirects=True)
 
+    # test content of my survey page correctly loaded
     def test_my_survey_page(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/my-survey/<int:user_id>' page is requested (GET)
-        THEN check that the response is valid and contains the correct surveys for the user
-        """
         # Login user
         self.login_user('testuser1@example.com', 'password')
 
@@ -28,12 +24,8 @@ class MySurveyTestCase(BaseTestCase):
             # Ensure surveys from other users are not included
             self.assertNotIn(b'Survey 2', response.data)
 
+    # test survey are deleted correctly
     def test_delete_survey(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/delete-survey/<int:survey_id>' route is accessed (POST)
-        THEN check that the survey is deleted from the database
-        """
         # Login user
         self.login_user('testuser1@example.com', 'password')
 

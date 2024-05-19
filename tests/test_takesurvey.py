@@ -10,12 +10,8 @@ class TakeSurveyTestCase(BaseTestCase):
             password=password
         ), follow_redirects=True)
 
+    # test take-survey page is correctly loaded
     def test_take_survey_get(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/take-survey/<int:survey_id>' page is requested (GET)
-        THEN check that the page is rendered correctly
-        """
         with self.client:
             # Login user
             self.login_user('testuser1@example.com', 'password')
@@ -27,12 +23,8 @@ class TakeSurveyTestCase(BaseTestCase):
             self.assertIn(b'Question 1', response.data)
             self.assertIn(b'Option 1', response.data)
 
+    # test take survey is correctly submitted
     def test_take_survey_post(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/take-survey/<int:survey_id>' page is submitted (POST)
-        THEN check that the survey responses are recorded and user is redirected
-        """
         with self.client:
             # Login user
             self.login_user('testuser1@example.com', 'password')

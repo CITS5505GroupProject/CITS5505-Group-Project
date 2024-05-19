@@ -4,11 +4,13 @@ from app.models import User
 from tests.test_base import BaseTestCase
 
 class LoginTestCase(BaseTestCase):
+    #test whether the login page rendered
     def test_login_page(self):
         response = self.client.get('/login')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Login', response.data)
     
+    #test case when user login successfully
     def test_successful_login(self):
         with self.client:
             response = self.client.post('/login', data=dict(
@@ -27,6 +29,7 @@ class LoginTestCase(BaseTestCase):
                 self.assertTrue(current_user.is_authenticated)
                 self.assertEqual(current_user.email, 'testuser1@example.com')
 
+    # test case when invalid user account and password are given
     def test_invalid_login(self):
         with self.client:
             response = self.client.post('/login', data=dict(
@@ -38,6 +41,7 @@ class LoginTestCase(BaseTestCase):
             self.assertIn(b'Username or email is incorrect, try again.', response.data)
             self.assertFalse(current_user.is_authenticated)
 
+    # test links under login page work
     def test_login_links(self):
         with self.client:
             response = self.client.get('/login')
