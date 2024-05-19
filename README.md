@@ -42,13 +42,13 @@ git clone https://github.com/CITS5505GroupProject/CITS5505-Group-Project.git
     python -m venv groupprojectenv
     ```
 
-    * enter environment (Command Prompt):
+    * enter environment (**Command Prompt**):
 
     ```
     groupprojectenv\Scripts\activate
     ```
 
-    * enter environment (PowerShell):
+    * enter environment (**PowerShell**):
 
     ```
     .\groupprojectenv\Scripts\Activate.ps1
