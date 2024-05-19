@@ -5,122 +5,84 @@
 <div class="container mt-3">
     <!-- Search Bar -->
     <div class="mb-3">
-        <input type="text" class="form-control" id="searchInput" onkeyup="searchItems()" placeholder="Search for survey title..." aria-label="Search">
+        <input type="text" class="form-control form-control-lg" id="searchInput" onkeyup="searchItems()" placeholder="Search for survey title..." aria-label="Search">
     </div>
     <div id="filter-options" class="container">
-        <div class="row row-cols-2 row-cols-md-5 g-2">
+        <div class="row row-cols-3 g-2">
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-education" autocomplete="off" value="education">
-                <label class="btn btn-outline-primary w-100" for="btn-check-education">Education</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-education">
+                    <img src="/static/img/education.jpg" class="img-fluid category-img" alt="Education">
+                    <span class="centered-text">Education</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-business" autocomplete="off" value="business">
-                <label class="btn btn-outline-primary w-100" for="btn-check-business">Business</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-business">
+                    <img src="/static/img/business.jpg" class="img-fluid category-img" alt="Business">
+                    <span class="centered-text">Business</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-healthcare" autocomplete="off" value="healthcare">
-                <label class="btn btn-outline-primary w-100" for="btn-check-healthcare">Healthcare</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-healthcare">
+                    <img src="/static/img/healthcare.jpg" class="img-fluid category-img" alt="Healthcare">
+                    <span class="centered-text">Healthcare</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-technology" autocomplete="off" value="technology">
-                <label class="btn btn-outline-primary w-100" for="btn-check-technology">Technology</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-technology">
+                    <img src="/static/img/technology.jpg" class="img-fluid category-img" alt="Technology">
+                    <span class="centered-text">Technology</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-entertainment" autocomplete="off" value="entertainment">
-                <label class="btn btn-outline-primary w-100" for="btn-check-entertainment">Entertainment</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-entertainment">
+                    <img src="/static/img/entertainment.jpg" class="img-fluid category-img" alt="Entertainment">
+                    <span class="centered-text">Entertainment</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-social" autocomplete="off" value="social">
-                <label class="btn btn-outline-primary w-100" for="btn-check-social">Social</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-social">
+                    <img src="/static/img/social.jpg" class="img-fluid category-img" alt="Social">
+                    <span class="centered-text">Social</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-politics" autocomplete="off" value="politics">
-                <label class="btn btn-outline-primary w-100" for="btn-check-politics">Politics</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-politics">
+                    <img src="/static/img/politics.jpg" class="img-fluid category-img" alt="Politics">
+                    <span class="centered-text">Politics</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-science" autocomplete="off" value="science">
-                <label class="btn btn-outline-primary w-100" for="btn-check-science">Science</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-science">
+                    <img src="/static/img/science.jpg" class="img-fluid category-img" alt="Science">
+                    <span class="centered-text">Science</span>
+                </label>
             </div>
             <div class="col">
                 <input type="checkbox" class="btn-check filter-type" id="btn-check-environment" autocomplete="off" value="environment">
-                <label class="btn btn-outline-primary w-100" for="btn-check-environment">Environment</label>
-            </div>
-            <div class="col">
-                <input type="checkbox" class="btn-check filter-type" id="btn-check-personal_development" autocomplete="off" value="personal_development">
-                <label class="btn btn-outline-primary w-100" for="btn-check-personal_development">Self-Improvement</label>
+                <label class="btn btn-outline-primary w-100 position-relative" for="btn-check-environment">
+                    <img src="/static/img/environment.jpg" class="img-fluid category-img" alt="Environment">
+                    <span class="centered-text">Environment</span>
+                </label>
             </div>
         </div>
     </div>
-    
 </div>
-    
     
 <!-- Content Containers -->
 <div class="container mt-3">
     <div class="row" id="survey-list"></div>
 </div>
 
-<script>
-// Example data, replace with actual data passed from the backend
-var surveys = {{ surveys|tojson | safe }};
-const surveyList = document.getElementById('survey-list');
-
-function displaySurveys() {
-    surveyList.innerHTML = ''; // Clear current surveys
-    surveys.forEach(survey => {
-        if (isActiveSurvey(survey) && matchesSearch(survey)) { // Check if the survey should be shown
-            const div = document.createElement('div');
-            div.className = 'col-12 col-md-4 survey-item'; // Bootstrap classes for responsiveness
-            div.setAttribute('data-type', survey.type);
-            div.innerHTML = `
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <div class="d-flex align-items-center">
-                            <img src="static/${survey.creator.profilePic}" class="rounded-circle me-2" width="40" height="40" alt="User">
-                            <div>
-                                <h6 class="mb-0">${survey.creator.username}</h6>
-                                <small class="text-muted">Created at: ${survey.created_at}</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>${survey.title}</strong></p>
-                        <p class="card-text">${survey.description}</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <a class="btn btn-info" href="/take-survey/${survey.id}">Answer</a> 
-                    </div>
-                </div>
-            `;
-            surveyList.appendChild(div);
-        }
-    });
-}
-
-function isActiveSurvey(survey) {
-    const checkedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(el => el.value);
-    return checkedTypes.length === 0 || checkedTypes.includes(survey.type);
-}
-
-function matchesSearch(survey) {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    return (
-        survey.title.toLowerCase().includes(searchInput) ||
-        survey.description.toLowerCase().includes(searchInput) ||
-        survey.creator.username.toLowerCase().includes(searchInput)
-    );
-}
-
-function searchItems() {
-    displaySurveys(); // Update display on search input
-}
-
-displaySurveys(); // Initial display
-
-document.querySelectorAll('.filter-type').forEach(input => {
-    input.addEventListener('change', displaySurveys); // Update display on filter change
-});
-</script>
+<script src="static/js/survey_dashboard.js"></script>
+<link rel="stylesheet" href="static/css/survey_dashboard.css">
 {% endblock %}
 
 <!-- {% block extra_js %}

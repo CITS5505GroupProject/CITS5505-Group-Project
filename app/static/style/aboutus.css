@@ -1,42 +1,54 @@
+/* Custom styles for the About Us page */
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Section padding */
 .section-padding {
-    padding: 60px 0;
+  padding: 60px 0;
 }
 
+/* Background color for sections */
 .section-bg {
-    background-color: #f9f9f9;
+  background-color: #f8f9fa;
 }
 
+/* Heading styles */
 .mission-text, .goal-text {
-    color: #05a0dd; 
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #0080b3;
+  font-weight: bold;
 }
 
+/* Email button styles */
 .email-button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.email-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  margin-top: 20px;
 }
 
 .email-button {
-    background-color: #029dda;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 80px 20px;
-    cursor: pointer;
-    border-radius: 22px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .email-button:hover {
-    background-color: #074c67;
+  background-color: #0056b3;
 }
+
+/* Image styles */
+.img-fluid {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+

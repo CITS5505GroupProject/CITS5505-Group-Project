@@ -1,0 +1,51 @@
+/* CSS for survey_dashboard */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    padding: 20px;
+}
+
+#filter-options .btn-outline-primary {
+    border-width: 2px;
+    font-weight: bold;
+    text-transform: capitalize;
+    position: relative;
+    padding: 0;
+}
+
+#filter-options .btn-check:checked + .btn-outline-primary {
+    border-color: #0d6efd;
+    box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+}
+
+.category-img {
+    width: 100%;
+    height: 100%; /* Fixed height for consistency */
+    object-fit: cover; /* Ensure the image covers the entire area */
+    border-radius: 5px;
+}
+
+.centered-text {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px; /* Border radius for rounded corners */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Position the label */
+    top: 0; /* Stretch to full height */
+    left: 0; /* Stretch to full width */
+    color: white;
+    font-size: 1.5rem; /* Increase font size */
+    font-weight: bold; /* Make font bold */
+    padding: 10px; /* Padding for better readability */
+    box-sizing: border-box;
+    text-align: center; /* Center the text */
+    z-index: 1; /* Ensure it overlays the image */
+    font-family: 'Arial', sans-serif; /* Update font family */
+    pointer-events: none;
+}
