@@ -59,6 +59,9 @@
 <div class="container mt-3">
     <div class="row" id="survey-list"></div>
 </div>
+<script>
+    var surveys = {{ surveys|tojson | safe }};
+</script>
 {% endblock %}
 
 {% block extra_js %}

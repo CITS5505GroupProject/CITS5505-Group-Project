@@ -1,5 +1,4 @@
 // Example data, replace with actual data passed from the backend
-var surveys = {{ surveys|tojson | safe }};
 const surveyList = document.getElementById('survey-list');
 
 function displaySurveys() {

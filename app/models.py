@@ -1,11 +1,15 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from app import db
+import pytz
 from flask_login import UserMixin
 
 # calculate perth time for survey
 def get_perth_time():
-    return datetime.now() + timedelta(hours=8)
+    perth_time = datetime.now(pytz.timezone('Australia/Perth')).replace(second=0, microsecond=0)
+    return perth_time
+    
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

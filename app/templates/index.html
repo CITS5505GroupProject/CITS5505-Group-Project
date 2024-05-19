@@ -26,9 +26,16 @@
         <h2>Survey Stream <br>Survey the World</h2>
         <p>Shape the Future with Every Survey</p>
         <div class="tutorial-link">
+          <!-- Provide different link based on user's login status -->
+          {% if current_user.is_authenticated %}
+          <a href="{{url_for('main.my_survey', user_id=current_user.id)}}" rel="noopener noreferer">
+            Start For Free<i class="bi bi-arrow-right-circle-fill"></i>
+          </a>
+          {% else %}
           <a href="{{url_for('main.register')}}" rel="noopener noreferer">
             Start For Free<i class="bi bi-arrow-right-circle-fill"></i>
           </a>
+          {% endif %}
         </div>
       </div>
 </body>
