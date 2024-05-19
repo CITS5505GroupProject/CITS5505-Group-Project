@@ -11,12 +11,8 @@ class UpdateProfileTestCase(BaseTestCase):
             password=password
         ), follow_redirects=True)
 
+    # test update profile page is correctly loaded
     def test_update_profile_page_loads(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/update_profile/<int:user_id>' page is requested (GET)
-        THEN check that the response is valid and the form is displayed
-        """
         # Login user
         self.login_user('testuser1@example.com', 'password')
 
@@ -27,6 +23,7 @@ class UpdateProfileTestCase(BaseTestCase):
         self.assertIn(b'Username', response.data)
         self.assertIn(b'Profile Picture', response.data)
 
+    # test whether update profile page update data correctly
     def test_successful_profile_update(self):
         """
         GIVEN a Flask application configured for testing
@@ -61,12 +58,8 @@ class UpdateProfileTestCase(BaseTestCase):
         self.assertEqual(user.username, 'updateduser')
         self.assertTrue(os.path.exists(os.path.join(self.app.config['UPLOAD_FOLDER'], 'dummy.jpg')))
 
+    # check whether user can access to other user's page
     def test_update_profile_unauthorized(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN a user tries to access another user's update profile page
-        THEN check that the user is redirected to the login page
-        """
         # Login user
         self.login_user('testuser1@example.com', 'password')
 

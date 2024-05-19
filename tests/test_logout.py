@@ -9,13 +9,9 @@ class LogoutTestCase(BaseTestCase):
             password=password
         ), follow_redirects=True)
 
-    def test_logout(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/logout' route is accessed (GET)
-        THEN check that the user is logged out and redirected to the index page
-        """
 
+    # test the user is logged out
+    def test_logout(self):
         with self.client:
         # Login user
             self.login_user('testuser2@example.com', 'password')
@@ -31,6 +27,7 @@ class LogoutTestCase(BaseTestCase):
             # Check that the user is logged out
             self.assertFalse(current_user.is_authenticated)
 
+    # test user is redirect to index page after logout
     def test_logout_redirect(self):
         """
         GIVEN a Flask application configured for testing

@@ -2,7 +2,9 @@ import unittest
 from app import create_app, db
 from app.models import User, Survey, Question, Option, UserAnswer
 
+# Based test case
 class BaseTestCase(unittest.TestCase):
+    # action before start the test
     def setUp(self):
         self.app = create_app(config_name='TESTING')
         self.client = self.app.test_client()
@@ -13,11 +15,13 @@ class BaseTestCase(unittest.TestCase):
         # insert some mock data
         self.insert_mock_data()
 
+    # action after completed a test
     def tearDown(self):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
     
+    #mock data
     def insert_mock_data(self):
         # Create users
         user1 = User(username='testuser1', email='testuser1@example.com')

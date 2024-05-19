@@ -4,12 +4,9 @@ from app.models import User
 from tests.test_base import BaseTestCase
 
 class RegisterTestCase(BaseTestCase):
+
+    # test register page load correctly
     def test_register_page_loads(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/register' page is requested (GET)
-        THEN check that the response is valid and the form is displayed
-        """
         response = self.client.get('/register')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Sign Up', response.data)
@@ -18,12 +15,8 @@ class RegisterTestCase(BaseTestCase):
         self.assertIn(b'Password', response.data)
         self.assertIn(b'Confirm Password', response.data)
 
+    # test case when user successfully sign up
     def test_successful_registration(self):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/register' page is posted to (POST) with valid data
-        THEN check that the user is registered and redirected to the login page
-        """
         response = self.client.post('/register', data=dict(
             username='newuser',
             email='newuser@example.com',
@@ -38,7 +31,7 @@ class RegisterTestCase(BaseTestCase):
         self.assertIsNotNone(user)
         self.assertEqual(user.username, 'newuser')
 
-
+    # test when user register with existing email in our system
     def test_registration_with_existing_email(self):
         """
         GIVEN a Flask application configured for testing
