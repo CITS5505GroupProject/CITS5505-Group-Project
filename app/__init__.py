@@ -6,12 +6,14 @@ from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 from flask_mail import Mail
 
+# initialize
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 csrf = CSRFProtect()
 mail = Mail()
 
+# Testing config
 class TestConfig:
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
@@ -19,6 +21,7 @@ class TestConfig:
     SECRET_KEY = "TESTING_KEY"
 
 
+# create app
 def create_app(config_name=None):
     app = Flask(__name__)
 

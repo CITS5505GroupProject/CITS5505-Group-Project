@@ -59,8 +59,8 @@ class Survey(db.Model):
             'type': self.type,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             'user_id': self.user_id,
-            'creator': self.creator.to_dict() if self.creator else None,  # Assuming a backref 'creator' from User
-            'questions': [question.to_dict() for question in self.questions]  # This will include questions if needed
+            'creator': self.creator.to_dict() if self.creator else None,
+            'questions': [question.to_dict() for question in self.questions]
     }
 
 class Question(db.Model):
@@ -82,6 +82,7 @@ class Option(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'), nullable=False)
     user_answers = db.relationship('UserAnswer', backref='selected', cascade="all, delete-orphan")
     def to_dict(self):
+        """Converts this Survey object into a dictionary format, which can be easily turned into JSON."""
         return {
             'id': self.id,
             'text': self.text

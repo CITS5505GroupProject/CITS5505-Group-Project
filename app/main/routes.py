@@ -10,12 +10,14 @@ from flask_mail import Message
 from sqlalchemy import func
 from app.main import main
 
+# Index/Home page
 @main.route('/')
 @main.route('/index')
 def index():
     user = {'username':'Tony', 'DoB':'10/12/2001'}
     return render_template('/index.html', title = 'Home Page', user = user)
 
+# Register/Sign up page
 @main.route('/register', methods=['GET', 'POST'])
 def register():
     form = registrationForm()
@@ -32,6 +34,7 @@ def register():
             flash('Username or email already exists. Please use a different one.', 'danger')
     return render_template('user/register.html', title='Register', form=form)
 
+# Login page
 @main.route('/login', methods=['GET', 'POST'])
 def login():
     form = loginForm()
@@ -47,11 +50,13 @@ def login():
             flash('Username or email is incorrect, try again.', 'danger')
     return render_template('user/login.html', title='Login', form=form)
 
+# Logout
 @main.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
 
+# Reset password page
 @main.route('/reset-password', methods = ['GET', 'POST'])
 def reset_password():
     form = ResetPasswordForm()
@@ -75,6 +80,7 @@ def reset_password():
         
     return render_template('user/reset_password.html', form = form)
 
+# Change password page
 @main.route('/change-password/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def change_password(user_id):
@@ -90,6 +96,7 @@ def change_password(user_id):
             redirect(url_for('main.change_password', user_id = user_id))
     return render_template('user/change_password.html', form=form)
 
+# Create survey page
 @main.route('/survey/create-survey', methods=['GET', 'POST'])
 @login_required
 def create_survey():
@@ -122,6 +129,7 @@ def create_survey():
 
     return render_template('survey/create_survey.html', form=survey_form)
 
+# dynamic form function
 def create_survey_form(survey_id):
     class DynamicSurveyForm(FlaskForm):
         # Dynamic fields will be added here
@@ -139,6 +147,7 @@ def create_survey_form(survey_id):
     
     return DynamicSurveyForm()
 
+# Take survey page
 @main.route('/take-survey/<int:survey_id>', methods=['GET', 'POST'])
 @login_required
 def take_survey(survey_id):
@@ -147,8 +156,6 @@ def take_survey(survey_id):
     survey = Survey.query.get_or_404(survey_id)
     
     if form.validate_on_submit():
-        # Handle the form submission
-        # Extract answers here, e.g., form.question_1.data
         for field in form:
             print(f'{field.name} : {field.data}')
             if str(field.name).startswith("question_"):
@@ -160,6 +167,7 @@ def take_survey(survey_id):
     
     return render_template('survey/take_survey.html', form=form, survey=survey)
 
+# Update profile page
 @main.route('/update_profile/<int:user_id>', methods=['GET', 'POST'])
 def update_profile(user_id):
     if current_user.is_authenticated and current_user.id == user_id:
@@ -184,18 +192,21 @@ def update_profile(user_id):
     
     return render_template('survey/update_profile.html', form=form, profile_url=profile_url)
 
+# Survey dashboard page
 @main.route('/survey-dashboard')
 def survey_dashboard():
     surveys = Survey.query.all()
     surveys_data = [survey.to_dict() for survey in surveys]
     return render_template('survey/survey_dashboard.html', surveys=surveys_data)
 
+# My survey page
 @main.route('/my-survey/<int:user_id>', methods=['GET'])
 @login_required
 def my_survey(user_id):
     surveys = Survey.query.filter_by(user_id=user_id).all()
     return render_template('survey/my_surveys.html', surveys=surveys)
 
+# delete survey function
 @main.route('/survey/delete/<int:survey_id>', methods=['DELETE', 'GET'])
 @login_required
 def delete_survey(survey_id):
@@ -212,16 +223,19 @@ def delete_survey(survey_id):
         db.session.rollback()
         return jsonify({"message": "An error occurred while deleting the survey.", "error": str(e)}), 500
     
+# deaderboard function
 @main.route('/leaderboard')
 def leaderboard():
     top10 = User.query.order_by(User.point.desc()).limit(10).all()
     return render_template('ranking.html', top10 = top10)
 
+# about us page
 @main.route('/about-us')
 def about_us():
     return render_template('aboutus.html')
 
-@main.route('/survey/<int:survey_id>')
+# survey result page
+@main.route('/survey/survey-result/<int:survey_id>')
 def survey_result(survey_id):
     survey = Survey.query.get_or_404(survey_id)
 
