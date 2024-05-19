@@ -82,6 +82,6 @@ Students
 | Student           | UWA ID        | Github ID     |
 | ------------------|:-------------:|:-------------:|
 | Siyuan Zhou       | 23861658      | TonyZzz       |
-| Shuangefei Li     | 23428364      | DoubleAshley  |
+| Shuangefei Li     | 23428364      | DoubleAshley/DoubleAshley00  |
 | Qianqian Li       | 23770748      | qianqianli626 |
 | Chinmai Ravindran | 23864156      | chinmaiii     |
