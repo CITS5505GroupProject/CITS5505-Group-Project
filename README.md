@@ -4,25 +4,24 @@
 Welcome to our Survey Website! Our platform is designed to facilitate the creation, distribution, and sharing of surveys to collect valuable data and insights. Whether you're conducting academic research, gathering customer feedback, or simply seeking opinions on various topics, our website provides a user-friendly interface to manage all your survey needs.
 
 ### Key Features
-* Create Survey
-* Answer Survey
-* User Management
-* Data Sharing
+- **Create Surveys**: Easily design surveys with customizable questions and options.
+- **Answer Surveys**: Participants can conveniently respond to surveys.
+- **User Management**: Register, manage user profiles, change password, reset password.
 
 ### More in the future:
-* More types of Survey
-* Compatibale with Social Media App
-* etc ...
+- More types of Survey
+- Compatibale with Social Media App
+- And more ...
 -----
 
 ## How to install and run project
 
-1. Clone the source code from github with following code
+1. **Clone the source code from github with following code**
 ```
 git clone https://github.com/CITS5505GroupProject/CITS5505-Group-Project.git
 ```
 
-2. Install virtual environment
+2. **Install virtual environment**
 create and enter virtual environment
     - For macOS user:
     ```
@@ -33,14 +32,14 @@ create and enter virtual environment
     ```
     python -m venv groupprojectenv
     ```
-        Command Prompt:
-        ```
-        groupprojectenv\Scripts\activate
-        ```
-        PowerShell:
-        ```
-        .\groupprojectenv\Scripts\Activate.ps1
-        ```
+    Command Prompt:
+    ```
+    groupprojectenv\Scripts\activate
+    ```
+    PowerShell:
+    ```
+    .\groupprojectenv\Scripts\Activate.ps1
+    ```
 
 3. Install Dependencies (required packages)
 ```
