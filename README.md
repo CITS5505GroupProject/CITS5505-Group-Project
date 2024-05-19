@@ -23,27 +23,37 @@ git clone https://github.com/CITS5505GroupProject/CITS5505-Group-Project.git
 
 2. **Install virtual environment**
 create and enter virtual environment
-    - For `macOS` user:
-    create environment:
-    ```
-    python3 -m venv groupprojectenv
-    ```
-    enter environment:
-    ```
-    source groupprojectenv/bin/activate
-    ```
-    - For `Windows` user:
-    ```
-    python -m venv groupprojectenv
-    ```
-        - Command Prompt:
+    - **For `macOS` user:** 
+
+        create environment:
         ```
-        groupprojectenv\Scripts\activate
+        python3 -m venv groupprojectenv
         ```
-        - PowerShell:
+
+        enter environment:
+
         ```
-        .\groupprojectenv\Scripts\Activate.ps1
+        source groupprojectenv/bin/activate
         ```
+    - **For `Windows` user:**
+
+        create environment
+
+        ```
+        python -m venv groupprojectenv
+        ```
+
+            - Command Prompt:
+
+                ```
+                groupprojectenv\Scripts\activate
+                ```
+                
+            - PowerShell:
+
+                ```
+                .\groupprojectenv\Scripts\Activate.ps1
+                ```
 
 3. Install Dependencies (required packages)
 ```
