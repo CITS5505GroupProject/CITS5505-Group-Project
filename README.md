@@ -77,6 +77,13 @@ After set up environment and installed required packages. And ran command line `
 
 -----
 
+## How to test website using test files
+Run the commond line to run test files
+```
+python -m unittest discover -s test
+```
+-----
+
 ## Group members
 Students 
 | Student           | UWA ID        | Github ID     |
