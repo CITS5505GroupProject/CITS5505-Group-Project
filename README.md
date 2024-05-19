@@ -11,6 +11,7 @@ Welcome to our Survey Website! Our platform is designed to facilitate the creati
 ### More in the future:
 - More types of Survey
 - Compatibale with Social Media App
+- Data Sharing
 - And more ...
 -----
 
