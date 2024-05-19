@@ -1,13 +1,10 @@
 {% extends 'user/base_user.html' %}
-{% block title %} Login {% endblock %}
 {% block content %}
 <div class="card shadow-lg" style="border-radius: 1rem;">
     <div class="card-body p-5 text-center">
         <h3 class="mb-5">Log In</h3>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
-
-            <!-- Email input field -->
             <div class="mb-3">
                 {{ form.email.label(class="form-label") }}
                 {{ form.email(class="form-control") }}
@@ -17,8 +14,6 @@
                     </div>
                 {% endif %}
             </div>
-
-            <!-- Password input field -->
             <div class="mb-3">
                 {{ form.password.label(class="form-label") }}
                 {{ form.password(class="form-control") }}
@@ -28,8 +23,6 @@
                     </div>
                 {% endif %}
             </div>
-
-            <!-- Section for displaying flash messages -->
             <div class="mb-3">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -42,14 +35,12 @@
                 {% endif %}
                 {% endwith %}
             </div>
-
-            <!-- Submit button for the form -->
             <div class="mb-3">
                 {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
             </div>
             <div class="mb-3">
-                <a href="{{ url_for('main.register') }}">Sign Up</a><br>
-                <a href="{{ url_for('main.reset_password') }}">Forget Password?</a>
+                <a href="{{ url_for('register') }}">Sign Up</a><br>
+                <a href="{{ url_for('reset_password') }}">Forget Password?</a>
             </div>
         </form>
     </div>

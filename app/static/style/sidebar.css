@@ -99,12 +99,7 @@ a.sidebar-link {
 }
 
 a.sidebar-link:hover {
-    background: linear-gradient(135deg,#8c8ff1 0%, #4783c7 100%);
-    border-left: 3px solid #1f1f1f;
-}
-
-a.sidebar-link:active {
-    background: linear-gradient(135deg,#8c8ff1 0%, #4783c7 100%);
+    background-color: rgba(255, 255, 255, .075);
     border-left: 3px solid #1f1f1f;
 }
 

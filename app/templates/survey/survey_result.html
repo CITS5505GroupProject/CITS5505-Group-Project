@@ -1,20 +1,16 @@
 {% extends 'navbar/navSidebar.html' %}
-{% block title %} Survey Result {% endblock %}
 {% block content %}
 <div class="content">
     <h2>Survey Result</h2>
     <div class="container">
         <hr>
-        <!-- Survey details: title, description, type, and creation date  -->
         <h3>{{ survey.title }}</h3>
         <p><strong>Description:</strong> {{ survey.description }}</p>
         <p><strong>Type:</strong> {{ survey.type }}</p>
         <p><strong>Created At:</strong> {{ survey.created_at }}</p>
-        <!-- Loop through each question in the survey -->
         {% for question_id, question in survey.questions.items() %}
             <div class="mt-4">
                 <hr>
-                <!-- Display the question text -->
                 <h5>{{ question.text }}</h5>
                 <table class="table table-bordered">
                     <thead>
@@ -24,7 +20,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Loop through each option for the current question  -->
                         {% for option in question.options %}
                             <tr>
                                 <td>{{ option.text }}</td>

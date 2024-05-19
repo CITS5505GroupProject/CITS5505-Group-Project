@@ -1,13 +1,49 @@
 {% extends 'navbar/navSidebar.html' %}
-{% block title %} My Profile {% endblock %}
 {% block content %}
-{% block extra_css %}
-  <link href="{{ url_for('static', filename = 'style/update_profile.css') }}" rel="stylesheet" >
-{% endblock %}
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, Helvetica, neue, sans-serif;
+    }
+    .container {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        text-align: center;
+        padding: 20px;
+        transition: margin-left 0.3s;
+        width: calc(100% - 280px); 
+    }
+    @media (max-width: 768px) {
+            .sidebar {
+                width: 100%; 
+                height: auto; 
+                position: relative;
+            }
 
+            .container {
+                margin-left: 0; 
+                width: 100%;
+            }
+    }
+    .profileimg {
+        width: 150px;  
+        height: 150px; 
+        object-fit: contain; 
+        border-radius: 50%;
+        border: 2px solid #dee2e6;
+    }
+    .form-label{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+</style>
 <body>
+
     <div class="container mt-5 d-flex justify-content-center align-items-center">
-        <!-- Form for updating the user profile, uses POST method and supports file upload -->
         <form method="POST" action="" enctype="multipart/form-data" class="profile-form">
             {{ form.hidden_tag() }}
             <div class="col-md-16">
@@ -16,23 +52,20 @@
             <div class="col-md-16">
                     {{ form.profile_pic.label(class="form-label") }}<br>
                     {{ form.profile_pic(class="form-control") }}<br>
-                    <!-- Display errors related to profile picture upload -->
                     {% if form.profile_pic.errors %}
                         {% for error in form.profile_pic.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
                     {% endif %}
-                    <!-- Label and input for username -->
                     {{ form.username.label(class="form-label") }}
                     {{ form.username(class="form-control") }}
-                    <!-- Read-only input for displaying email  -->
+                    <!-- waiting for be changed by tony -->
                     <label for="email" class="form-label"><strong>Email</strong></label>
                     <input type="email" class="form-control readonly-input" id="email" placeholder="{{ current_user.email }}" readonly>
-                    <!-- Read-only input for displaying points -->
                     <label for="points" class="form-label"><strong>Points</strong></label>
                     <input type="text" class="form-control readonly-input" id="points" placeholder="{{ current_user.point }}" readonly>
-                    <!-- Submit button for the form -->
-                    {{ form.submit(class="btn btn-primary ") }}
+                    <!-- end of coding be changed by tony  -->
+                    {{ form.submit(class="btn btn-success mt-3") }}
             </div>
         </form>
     </div>

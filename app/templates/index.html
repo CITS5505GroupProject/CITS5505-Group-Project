@@ -1,3 +1,5 @@
+
+
 {% extends 'navbar/navbar.html' %}
 
 {% set exclude_bootstrap = True %}
@@ -5,13 +7,10 @@
 {% block extra_css %}
   <link href="{{ url_for('static', filename = 'style/intro.css') }}" rel="stylesheet" >
 {% endblock %}
-
 {% block content %}
 <body>
-  <!-- Container for bouncing blobs animation -->
     <div class="bouncing-blobs-container">
         <div class="bouncing-blobs-glass"></div>
-        <!-- Bouncing blobs elements -->
         <div class="bouncing-blobs">
           <div class="bouncing-blob bouncing-blob--blue"></div>
           <div class="bouncing-blob bouncing-blob--blue"></div>
@@ -21,12 +20,11 @@
           <div class="bouncing-blob bouncing-blob--pink"></div>
         </div>
       </div>
-      <!-- Hero section with main content -->
       <div class="hero">
         <h2>Survey Stream <br>Survey the World</h2>
         <p>Shape the Future with Every Survey</p>
         <div class="tutorial-link">
-          <a href="{{url_for('main.register')}}" rel="noopener noreferer">
+          <a href="{{url_for('register')}}" rel="noopener noreferer">
             Start For Free<i class="bi bi-arrow-right-circle-fill"></i>
           </a>
         </div>
