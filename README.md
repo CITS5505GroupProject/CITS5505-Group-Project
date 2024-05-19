@@ -55,17 +55,22 @@ git clone https://github.com/CITS5505GroupProject/CITS5505-Group-Project.git
     .\groupprojectenv\Scripts\Activate.ps1
     ```
 
-3. Install Dependencies (required packages)
+3. **Install Dependencies (required packages)**
 ```
 pip install -r requirements.txt
 ```
 
-4. Run project
+4. **Set up database wit Flask-migrate**
+```
+flask db upgrade
+```
+
+5. **Run project**
 ```
 flask run
 ```
 
-5. So now you have the website ran in your local host!
+6. So now you have the website ran in your local host!
 
 ## How to launch website
 After set up environment and installed required packages. And ran command line `flask run`. Open the link provided in your terminal, its normally `http://127.0.0.1:5000`.

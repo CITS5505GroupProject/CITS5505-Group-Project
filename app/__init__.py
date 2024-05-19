@@ -57,7 +57,6 @@ def create_app(config_name=None):
 
     with app.app_context():
         from . import models
-        models.db.create_all()
 
         from app.main import main as main_blueprint
         app.register_blueprint(main_blueprint)
